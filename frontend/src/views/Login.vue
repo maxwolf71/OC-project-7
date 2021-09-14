@@ -8,11 +8,14 @@
             <input v-model="email" class="form-row__input" type="text" placeholder="Email Address">
         </div>
         <div class="form-row" v-if="mode == 'create'">
-            <input v-model="first_name" class="form-row__input" type="text" placeholder="First name">
-            <input v-model="last_name" class="form-row__input" type="text" placeholder="Last name">
+            <input v-model="firstName" class="form-row__input" type="text" placeholder="First name">
+            <input v-model="lastName" class="form-row__input" type="text" placeholder="Last name">
         </div>
         <div class="form_row">
             <input v-model="password" class="form-row__input" type="password" placeholder="Password">
+        </div>
+        <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
+            Email and/or password incorrect
         </div>
         <div class="form-row" v-if="mode == 'create' && status == 'error_create'">
             Email address already used !
@@ -40,9 +43,7 @@ export default {
         return {
             mode: 'login',
             email: '',
-            first_name: '',
-            last_name: '',
-            password: '',
+            password: ''
         }
     },
     mounted() {
@@ -54,7 +55,7 @@ export default {
     computed: {
         validatedFields() {
             if (this.mode ==  'create') {
-                if (this.email != '' && this.first_name != '' && this.last_name != '' && this.password != '') {
+                if (this.email != '' && this.firstName != '' && this.lastName != '' && this.password != '') {
                     return true
                 } else {
                     return false
@@ -91,8 +92,8 @@ export default {
             const self = this
             this.$store.dispatch('createAccount', {
                 email: this.email,
-                first_name: this.first_name,
-                last_name: this.last_name,
+                firstName: this.firstName,
+                lastName: this.lastName,
                 password: this.password
             }).then(function () {
                 self.login()

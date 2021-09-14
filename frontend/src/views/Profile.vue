@@ -1,8 +1,7 @@
 <template>
     <div class="card">
-        <h1 class="card__title">My space</h1>
-        <p class="card__subtitle">Here's my story...</p>
-        <p>{{ user.first_name }} {{ user.last_name }} {{ user.email }}</p>
+        <h1 class="card__title">{{ user.firstName }} {{ user.lastName }}</h1>
+        <p class="card__subtitle">Here's my latest post : <span class="bio">{{ user.bio }}</span></p>
         <img :src="user.photo"/>
         <div class="form_row">
             <button @click="logout()" class="button">

@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Message.init({
-    idUsers: DataTypes.INTEGER,
     title: DataTypes.STRING,
     content: DataTypes.STRING,
     attachement: DataTypes.STRING,
@@ -27,6 +26,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Message',
-  });
-  return Message;
+  })
+  return Message
 }

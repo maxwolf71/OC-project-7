@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 const axios = require('axios')
 
 const instance = axios.create({
-  baseURL: 'https://www.wawasensei.dev/api/demo-auth/',
+  baseURL: 'http://localhost:3000/api/',
 })
 
 let user = localStorage.getItem('user')
@@ -28,15 +28,15 @@ const store = createStore({
     status: '',
     user: user,
     userInfos: {
-      first_name: '',
-      last_name: '',
       email: '',
-      photo: ''
+      firstName: '',
+      lastName: '',
+      bio: ''
     }
   },
   mutations: {
     setStatus(state, status) {
-      state.status= status
+      state.status = status
     },
     logUser(state, user) {
       instance.defaults.headers.common['Authorization'] = user.token
@@ -58,9 +58,9 @@ const store = createStore({
     createAccount: ({ commit }, userInfos) => {
       commit('setStatus', 'loading')
       return new Promise((resolve, reject) => {
-        instance.post('/createAccount', userInfos)
+        instance.post('users/createAccount', userInfos)
           .then(function (response) {
-            commit('setStaus', 'created')
+            commit('setStatus', 'created')
             resolve(response)
           })
           .catch(function (error) {
@@ -70,9 +70,9 @@ const store = createStore({
       })
     },
     getUserInfos: ({ commit }) => {
-      instance.post('/infos')
+      instance.get('/users/infos')
           .then(function (response) {
-            commit('userInfos', response.data.infos)
+            commit('userInfos', response.data)
           })
           .catch(function () {
           })
@@ -80,7 +80,7 @@ const store = createStore({
     login: ({ commit }, userInfos) => {
       commit('setStatus', 'loading')
       return new Promise((resolve, reject) => {
-        instance.post('/login', userInfos)
+        instance.post('users/login', userInfos)
           .then(function (response) {
             commit('setStatus', '')
             commit('logUser', response.data)
