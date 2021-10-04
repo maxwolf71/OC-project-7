@@ -1,8 +1,8 @@
 // Imports
-const express = require('express')
-const usersCtrl = require('./routes/usersCtrl')
+const express      = require('express')
+const usersCtrl    = require('./routes/usersCtrl')
 const messagesCtrl = require('./routes/messagesCtrl')
-const likesCtrl = require('./routes/likesCtrl')
+const likesCtrl    = require('./routes/likesCtrl')
 
 // Router
 exports.router = (function () {

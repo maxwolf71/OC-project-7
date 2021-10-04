@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-
 const axios = require('axios')
 
 const instance = axios.create({

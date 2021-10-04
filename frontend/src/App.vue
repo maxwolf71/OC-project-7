@@ -6,7 +6,7 @@
 export default {
   name: "App",
   components: {},
-};
+}
 </script>
 
 <style>
@@ -21,7 +21,7 @@ export default {
   max-width: 100%;
 }
 body {
-  background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
+  background-image: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,13 +35,14 @@ img {
 .card {
   max-width: 100%;
   width: 540px;
-  background: white;
+  background: #ffd7d7;
   border-radius: 16px;
   padding: 32px;
 }
 .card__title {
   text-align: center;
   font-weight: 800;
+  color: #bb4c55;
 }
 .card__subtitle {
   text-align: center;
@@ -52,8 +53,8 @@ img {
   font-weight: bold;
 }
 .button {
-  background: #2196f3;
-  color: white;
+  background: #bb4c55;
+  color: #fff;
   border-radius: 8px;
   font-weight: 800;
   font-size: 15px;
