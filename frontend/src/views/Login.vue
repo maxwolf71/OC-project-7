@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <h1 class="card__title" v-if="mode == 'login'">Sign in</h1>
-        <h1 class="card__title" v-else>Register</h1>
+        <h1 class="card__title" v-else>Sign up</h1>
         <p class="card__subtitle" v-if="mode == 'login'">Don't have an account yet ? <span class="card__action" @click="switchToCreateAccount()">Create one</span></p>
         <p class="card__subtitle" v-else>Already have an account ? <span class="card__action" @click="switchToLogin()">Sign in</span></p>
         <div class="form-row">
@@ -54,13 +54,13 @@ export default {
     },
     computed: {
         validatedFields() {
-            if (this.mode ==  'create') {
+            if (this.mode ==  'create') { // if create
                 if (this.email != '' && this.firstName != '' && this.lastName != '' && this.password != '') {
                     return true
                 } else {
                     return false
                 }
-            } else {
+            } else { // if login
                 if (this.email != '' && this.password != '') {
                     return true
                 } else {
@@ -84,9 +84,8 @@ export default {
                 password: this.password
             }).then(function () {
                 self.$router.push('/profile')
-            }). catch(function (error) {
-                console.log(error)
             })
+            .catch(err => { console.log(err) })
         },
         createAccount() {
             const self = this
@@ -97,9 +96,8 @@ export default {
                 password: this.password
             }).then(function () {
                 self.login()
-            }). catch(function (error) {
-                console.log(error)
             })
+            .catch(err => { console.log(err) })
         },
     }
 }

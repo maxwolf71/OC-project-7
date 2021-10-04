@@ -2,8 +2,7 @@
 const express = require('express')
 const apiRouter = require('./apiRouter').router
 
-// Instance of server 
-const server = express()
+const server = express() // Instance of server 
 
 const cors = require('cors')
 server.use(
@@ -12,8 +11,7 @@ server.use(
     })
 )
 
-// Body-parser deprecated
-server.use(express.json())
+server.use(express.json()) // Body-parser deprecated
 
 // Configure Routes 
 server.get('/', function (req, res) {
