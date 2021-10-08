@@ -47,8 +47,8 @@ export default {
         }
     },
     mounted() {
-        if (this.$store.state.user.userId != -1) {
-            this.$router.push('/profile')
+        if (this.$store.state.user.userId != -1) { // if the id exists
+            this.$router.push('/')
             return
         }
     },
@@ -83,7 +83,7 @@ export default {
                 email: this.email,
                 password: this.password
             }).then(function () {
-                self.$router.push('/profile')
+                self.$router.push('/feed')
             })
             .catch(err => { console.log(err) })
         },

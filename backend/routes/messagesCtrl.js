@@ -18,6 +18,7 @@ module.exports = {
         // Params
         const title = req.body.title
         const content = req.body.content
+        //const attachement = req.body.file
 
         if (title == null || content == null) {
             return res.status(400).json({ 'error': 'missing parameters' })
@@ -44,8 +45,9 @@ module.exports = {
                     models.Message.create({
                         title: title,
                         content: content,
+                        attachement: 0,
                         likes: 0,
-                        UserId : userFound.id
+                        UserId: userFound.id
                     })
                         .then(function (newMessage) {
                             done(newMessage)
@@ -65,31 +67,31 @@ module.exports = {
 
     // SHOW POSTS  ***********************************************************************
     listMessages: function (req, res) {
-        const fields = req.query.fields
-        const limit  = parseInt(req.query.limit)
-        const offset = parseInt(req.query.offset)
-        const order  = req.query.order
 
         models.Message.findAll({
-            order: [(order != null) ? order.split(':') : ['title', 'ASC']],
-            attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
-            limit: (!isNaN(limit)) ? limit : null,
-            offset: (!isNaN(offset)) ? offset : null,
             include: [{
                 model: models.User,
                 attributes: [ 'firstName', 'lastName' ]
             }]
         })
-        .then(function(messages) {
-            if (messages) {
-                res.status(200).json(messages)
-            } else {
-                res.status(404).json({ 'error': 'no messages found' })
-            }
+            .then(function (messages) {
+                if (messages) {
+                    res.status(200).json(messages)
+                } else {
+                    res.status(404).json({ 'error': 'no messages found' })
+                }
+            })
+            .catch(error => {
+                res.status(500).json({ 'error': error })
+            })
+    },
+    // SHOW POSTS  ***********************************************************************
+    deleteMessages: function (req, res) {
+        models.Message.destroy({
+           
         })
-        .catch(function(err) {
-            res.status(500).json({ 'error': 'invalid fields' })
-        })
+        .then()
+        .catch(error => { res.status(500).json({ 'error': error }) })
     }
 
 }
