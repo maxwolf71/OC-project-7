@@ -29,7 +29,7 @@ body {
   padding: 32px;
 }
 img {
-  max-width: 100%;
+  max-width: 30%;
   border-radius: 8px;
 }
 .card {
@@ -81,5 +81,10 @@ img {
 .button--disabled:hover {
   cursor: not-allowed;
   background: #cecece;
+}
+.messages {
+  border: 2px solid black;
+  padding: 5px;
+  margin-bottom: 5px;
 }
 </style>

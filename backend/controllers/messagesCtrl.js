@@ -1,7 +1,7 @@
 // Imports
 const models = require('../models')
 const asyncLib = require('async')
-const jwtUtils = require('../utils/jwt.utils')
+const jwt = require('../middleware/auth')
 
 //Constants
 const TITLE_LIMIT = 2
@@ -13,14 +13,14 @@ module.exports = {
     // POST A MESSAGE ***********************************************************************
     createMessage: function (req, res) {
         const headerAuth = req.headers['authorization']
-        const userId = jwtUtils.getUserId(headerAuth)
+        const userId = jwt.getUserId(headerAuth)
 
         // Params
         const title = req.body.title
         const content = req.body.content
-        //const attachement = req.body.file
+        const attachement = req.body.file
 
-        if (title == null || content == null) {
+        if (title == '' || content == '') {
             return res.status(400).json({ 'error': 'missing parameters' })
         }
 
@@ -42,18 +42,35 @@ module.exports = {
             },
             function (userFound, done) {
                 if (userFound) {
-                    models.Message.create({
-                        title: title,
-                        content: content,
-                        attachement: 0,
-                        likes: 0,
-                        UserId: userFound.id
-                    })
-                        .then(function (newMessage) {
-                            done(newMessage)
+                    if (req.file == null) {
+                        models.Message.create({
+                            title: title,
+                            content: content,
+                            attachement: 0,
+                            likes: 0,
+                            UserId: userFound.id
                         })
+                            .then(function (newMessage) {
+                                done(newMessage)
+                            })
+                    }
+
+                    else {
+                        models.Message.create({
+                            title: title,
+                            content: content,
+                            attachement: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+                            likes: 0,
+                            UserId: userFound.id
+                        })
+                            .then(function (newMessage) {
+                                done(newMessage)
+                            })
+                    }
+
+
                 } else {
-                    return res.status(404).json({ 'error': 'user not found' })
+                    res.status(404).json({ 'error': 'user not found' })
                 }
             }
         ], function (newMessage) {
@@ -71,7 +88,7 @@ module.exports = {
         models.Message.findAll({
             include: [{
                 model: models.User,
-                attributes: [ 'firstName', 'lastName' ]
+                attributes: ['firstName', 'lastName']
             }]
         })
             .then(function (messages) {
@@ -85,13 +102,9 @@ module.exports = {
                 res.status(500).json({ 'error': error })
             })
     },
-    // SHOW POSTS  ***********************************************************************
+    // DELETE POST  ***********************************************************************
     deleteMessages: function (req, res) {
-        models.Message.destroy({
-           
-        })
-        .then()
-        .catch(error => { res.status(500).json({ 'error': error }) })
+
     }
 
 }

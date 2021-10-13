@@ -1,15 +1,12 @@
 // Imports
 const express = require('express')
 const apiRouter = require('./apiRouter').router
+const path = require('path') // help to generate path for images
 
 const server = express() // Instance of server 
 
-const cors = require('cors')
-server.use(
-    cors({
-        origin: '*'
-    })
-)
+const cors = require('cors') // Deal with cor errors
+server.use(cors())
 
 server.use(express.json()) // Body-parser deprecated
 
@@ -20,8 +17,10 @@ server.get('/', function (req, res) {
 })
 
 server.use('/api/', apiRouter)
+server.use('/images', express.static(path.join(__dirname, 'images'))) // add image
 
 // Launch server
 server.listen(3000, function () {
     console.log('Server is listening !')
 })
+

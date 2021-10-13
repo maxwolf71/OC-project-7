@@ -1,6 +1,6 @@
 // Imports
 const models   = require('../models')
-const jwtUtils = require('../utils/jwt.utils')
+const jwtUtils = require('../middleware/auth')
 const asyncLib = require('async')
 
 // Constants

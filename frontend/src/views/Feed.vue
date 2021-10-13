@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div v-for="message in messages" :key="message">
+    <router-link to="/profile">Go to my profile</router-link> |
+    <router-link to="/message">Post a message</router-link>
+
+    <div class="messages" v-for="message in messages" :key="message">
       <h1>{{ message.User.firstName }} {{ message.User.lastName }}</h1>
-      <h2>{{ message. title}}</h2>
+      <h3>{{ message. title}}</h3>
       <p>{{ message.content }}</p>
+      <img :src="message.attachement" alt=""/>
     </div>
   </div>
 </template>

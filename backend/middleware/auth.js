@@ -6,13 +6,11 @@ const JWT_SIGN_SECRET = 'JWT_SIGN_TOKEN'
 module.exports = {
     generateTokenForUser: function(userData) {
         return jwt.sign({
-            userId: userData.id,
-            isAdmin: userData.isAdmin
-        },
-            JWT_SIGN_SECRET,
-            {
-                expiresIn: '12h'
-            })
+                userId: userData.id,
+                isAdmin: userData.isAdmin
+            },
+            JWT_SIGN_SECRET,{ expiresIn: '12h' }
+        )
     },
 
     parseAuthorization: function(authorization) {

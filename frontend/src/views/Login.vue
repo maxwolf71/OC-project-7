@@ -83,7 +83,7 @@ export default {
                 email: this.email,
                 password: this.password
             }).then(function () {
-                self.$router.push('/feed')
+                self.$router.push('/profile')
             })
             .catch(err => { console.log(err) })
         },

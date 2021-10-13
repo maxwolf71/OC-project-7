@@ -1,6 +1,6 @@
 // Imports
 const bcrypt = require('bcrypt')
-const jwtUtils = require('../utils/jwt.utils')
+const jwtUtils = require('../middleware/auth')
 const models = require('../models')
 const asyncLib = require('async')
 
