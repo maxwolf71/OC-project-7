@@ -6,7 +6,7 @@
 export default {
   name: "App",
   components: {},
-}
+};
 </script>
 
 <style>
@@ -21,10 +21,7 @@ export default {
   max-width: 100%;
 }
 body {
-  background-image: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: lightblue;
   min-height: 100vh;
   padding: 32px;
 }
@@ -86,5 +83,13 @@ img {
   border: 2px solid black;
   padding: 5px;
   margin-bottom: 5px;
+}
+h1 {
+  text-align: center;
+  color: red;
+  font-size: 2.5rem;
+  font-weight: bold;
+  border-bottom: 3px blue solid;
+  margin: 30px 15px;
 }
 </style>

@@ -20,7 +20,7 @@ exports.router = (function () {
     // Messages routes
     apiRouter.route('/messages/new').post(multer, messagesCtrl.createMessage)
     apiRouter.route('/messages/').get(multer, messagesCtrl.listMessages)
-    //apiRouter.route('/messages/:d').delete(messagesCtrl.deleteMessage)
+    apiRouter.route('/messages/:id').delete(messagesCtrl.deleteMessage)
 
     // Likes routes
     //apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likePost)

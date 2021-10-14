@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Banner title="Message feed" />
     <router-link to="/profile">Go to my profile</router-link> |
     <router-link to="/message">Post a message</router-link>
 
@@ -13,9 +14,12 @@
 </template>
 
 <script>
+import Banner from "@/components/Banner"
 import axios from "axios"
 
 export default {
+  name: 'Home',
+  components: { Banner },
   data() {
     return {
       messages: [],
