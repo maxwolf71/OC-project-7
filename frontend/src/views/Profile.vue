@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <Banner title="My Profile" />
     <router-link to="/feed">Go to message feed</router-link> |
     <router-link to="/message">Post a message</router-link>
     
@@ -17,9 +18,11 @@
 
 <script>
 import { mapState } from "vuex";
+import Banner from "@/components/Banner"
 
 export default {
   name: "Profile",
+  components: { Banner },
   mounted() {
     if (this.$store.state.user.userId == -1) {
       //if user id -1

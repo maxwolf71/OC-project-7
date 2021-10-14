@@ -2,10 +2,10 @@
 const express = require('express')
 const apiRouter = require('./apiRouter').router
 const path = require('path') // help to generate path for images
+const cors = require('cors') // Deal with cor errors
 
 const server = express() // Instance of server 
 
-const cors = require('cors') // Deal with cor errors
 server.use(cors())
 
 server.use(express.json()) // Body-parser deprecated
