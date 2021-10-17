@@ -1,13 +1,11 @@
 <template>
   <div>
     <Banner title="Message feed" />
-    <router-link to="/profile">Go to my profile</router-link> |
-    <router-link to="/message">Post a message</router-link>
 
-    <div class="messages" v-for="message in messages" :key="message">
-      <h1>{{ message.User.firstName }} {{ message.User.lastName }}</h1>
+    <div class="card" v-for="message in messages" :key="message">
+      <h1 class="card__title" >{{ message.User.firstName }} {{ message.User.lastName }}</h1>
       <h3>{{ message. title}}</h3>
-      <p>{{ message.content }}</p>
+      <p class="card__title">{{ message.content }}</p>
       <img :src="message.attachement" alt=""/>
     </div>
   </div>
@@ -18,7 +16,7 @@ import Banner from "@/components/Banner"
 import axios from "axios"
 
 export default {
-  name: 'Home',
+  name: 'Feed',
   components: { Banner },
   data() {
     return {

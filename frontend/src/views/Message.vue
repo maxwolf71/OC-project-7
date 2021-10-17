@@ -1,50 +1,77 @@
 <template>
-  <div class="">
-    <router-link to="/profile">Go to my profile</router-link> |
-    <router-link to="/feed">See message feed</router-link>
+  <div class="createPost">
     <Banner title="Post a message" />
-    <div class="message">
-      <p>Message content here</p>
-    </div>
+        <h2>Enter you text here :</h2>
+        <div class="newPost">
+            <form class="formCreate" @submit.prevent="createMessage">
 
-    <div class="inputfield">
-      <button @click="postMessage()" type="submit">Post message</button>
+                <div class="formNewPost">
+                    <label for="title"></label>
+                    <input name="title" class="contentNewPost" placeholder="Message title here" required v-model="title"><br>
+                </div>
+
+                <div class="formNewPost">
+                    <label for="content"></label>
+                    <textarea name="content" class="contentNewPost" placeholder="Text content here" required v-model="content"></textarea> <br>
+                </div>
+
+                <div class="formNewPost">
+                    <label for="image">
+                        <input class="imageNewPost" type="file" name="image" ref="image" v-on:change="upload"> <br>
+                    </label>
+                </div>
+
+                <button type="submit">Publier</button>
+
+            </form>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
 import Banner from "@/components/Banner"
 import axios from "axios"
-import {mapState} from "vuex";
 
 export default {
-  name: "Message",
-  components: { Banner },
+  name: 'Message',
   data() {
     return {
-      title: "",
-      comment: "",
-      message: [],
+      title: '',
+      content: '',
+      attachement: null
     }
   },
-  computed: {
-    validatedFields: function() {
-      return this.title !== ""
-      //return this.comment !== ""
-    },
-    ...mapState(["status"])
+  mounted() {
+    if (this.$store.state.user.userId == -1) { // if userId doesn't exist
+      this.$router.push("/") //go back to login
+      return
+    }
   },
+  components: { Banner },
   methods: {
-    postMessage() {
-      axios
-        .post("http://localhost:3000/api/messages/new")
-        .then((res) => {
-          this.feed = res.data
-          self.$router.push("/profile")
-        })
-        .catch((err) => console.log(err))
-    },
-  },
+    createMessage() {
+      const formCreate = document.getElementsByClassName("formCreate")[0]
+      const token = this.$store.state.user.token
+      let data = new FormData(formCreate)
+         
+      axios.post("http://localhost:3000/api/messages/new", data, {
+          headers: {
+              "Content-Type" : "application/json",
+              "Authorization": `Bearer ${token}`
+          }
+      })
+      .then(res => 
+      {
+          if (res) 
+          {
+              this.$router.push("/feed")
+          }
+      })
+      .catch(error => 
+      {
+          console.log( error.message )
+      })
+    }
+  }
 }
 </script>

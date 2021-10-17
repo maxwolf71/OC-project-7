@@ -1,7 +1,6 @@
 // Imports
 const fs = require('fs')
 const models = require('../models')
-const asyncLib = require('async')
 const jwtUtils = require('../middleware/auth')
 
 // Constants
@@ -25,63 +24,41 @@ module.exports = {
             return res.status(400).json({ 'error': 'missing parameters' })
         }
 
-        if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
+        /*if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
             return res.status(400).json({ 'error': 'invalid parameters' })
-        }
+        }*/
 
-        asyncLib.waterfall([
-            function (done) {
-                models.User.findOne({
-                    where: { id: userId }
-                })
-                    .then(function (userFound) {
-                        done(null, userFound)
+        models.User.findOne({
+            where: { id: userId }
+        })
+        .then(userFound => {
+            if (userFound) {
+                if (req.file == null) {
+                    models.Message.create({
+                        title: title,
+                        content: content,
+                        attachement: 0,
+                        likes: 0,
+                        UserId: userFound.id
                     })
-                    .catch(function (err) {
-                        return res.status(500).json({ 'error': 'unable to verify user' })
-                    })
-            },
-            function (userFound, done) {
-                if (userFound) {
-                    if (req.file == null) {
-                        models.Message.create({
-                            title: title,
-                            content: content,
-                            attachement: 0,
-                            likes: 0,
-                            UserId: userFound.id
-                        })
-                            .then(function (newMessage) {
-                                done(newMessage)
-                            })
-                    }
-
-                    else {
-                        models.Message.create({
-                            title: title,
-                            content: content,
-                            attachement: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-                            likes: 0,
-                            UserId: userFound.id
-                        })
-                            .then(function (newMessage) {
-                                done(newMessage)
-                            })
-                    }
-
-
+                    .then(newMessage => res.status(201).json(newMessage))
+                    .catch(err => res.status(404).json({ error: 'user not found' }))
                 } else {
-                    res.status(404).json({ 'error': 'user not found' })
+                    models.Message.create({
+                        title: title,
+                        content: content,
+                        attachement: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+                        likes: 0,
+                        UserId: userFound.id
+                    })
+                    .then(newMessage => res.status(201).json(newMessage))
+                    .catch(err => res.status(404).json({ error: 'user not found' }))
                 }
             }
-        ], function (newMessage) {
-            if (newMessage) {
-                return res.status(201).json(newMessage)
-            } else {
-                return res.status(500).json({ 'error': 'cannot post message' })
-            }
         })
+        .catch(error => res.status(500).json({ error: 'unable to verify user' }))
     },
+
     listMessages: function (req, res) {
         const fields = req.query.fields
         const limit = parseInt(req.query.limit)
@@ -93,7 +70,7 @@ module.exports = {
         }
 
         models.Message.findAll({
-            order: [(order != null) ? order.split(':') : ['title', 'DESC']],
+            order: [(order != null) ? order.split(':') : ['createdAt', 'ASC']],
             attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
             limit: (!isNaN(limit)) ? limit : null,
             offset: (!isNaN(offset)) ? offset : null,
@@ -122,7 +99,7 @@ module.exports = {
 
         async function main() {
 
-            //let isAdmin = await isAdmin2()
+            let isAdmin = await isAdmin2()
 
             if (userId < 1)
                 return res.status(400).json({ 'error': 'Wrong token' })
@@ -156,9 +133,9 @@ module.exports = {
                     })
             }
         }
-        /*function isAdmin2() {
+        function isAdmin2() {
             return models.User.findOne({ attributes: ['isAdmin'], where: { id: userId } })
-        }*/
+        } 
 
     }
 }

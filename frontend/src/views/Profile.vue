@@ -1,12 +1,11 @@
 <template>
-  <div class="">
+  <div>
     <Banner title="My Profile" />
-    <router-link to="/feed">Go to message feed</router-link> |
-    <router-link to="/message">Post a message</router-link>
     
     <div class="card">
       <h1 class="card__title">{{ user.firstName }} {{ user.lastName }}</h1>
-      <p>{{ user.bio }}</p>
+      <h3 class="card__subtitle">Bio : </h3>
+      <p class="bio">{{ user.bio }}</p>
       <div class="form_row">
         <button @click="logout()" class="button">
           Sign out
@@ -17,7 +16,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "vuex"
 import Banner from "@/components/Banner"
 
 export default {
@@ -26,10 +25,10 @@ export default {
   mounted() {
     if (this.$store.state.user.userId == -1) {
       //if user id -1
-      this.$router.push("/"); //go back to login
-      return;
+      this.$router.push("/") //go back to login
+      return
     }
-    this.$store.dispatch("getUserInfos"); // retrieve user infos
+    this.$store.dispatch("getUserInfos") // retrieve user infos
   },
   computed: {
     ...mapState({
@@ -38,9 +37,9 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.commit("logout");
-      this.$router.push("/");
+      this.$store.commit("logout")
+      this.$router.push("/")
     },
   },
-};
+}
 </script>

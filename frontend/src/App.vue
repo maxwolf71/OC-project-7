@@ -1,12 +1,16 @@
 <template>
-  <router-view />
+  <nav>
+    <router-link to="/profile">Profile</router-link> |
+    <router-link to="/feed">Message feed</router-link> |
+    <router-link to="/message">Post a message</router-link>
+    <router-view />
+  </nav>
 </template>
 
 <script>
 export default {
   name: "App",
-  components: {},
-};
+}
 </script>
 
 <style>
@@ -21,7 +25,7 @@ export default {
   max-width: 100%;
 }
 body {
-  background-color: lightblue;
+  background-color: #532380;
   min-height: 100vh;
   padding: 32px;
 }
@@ -32,22 +36,30 @@ img {
 .card {
   max-width: 100%;
   width: 540px;
-  background: #ffd7d7;
+  background: #ce9f9f;
   border-radius: 16px;
-  padding: 32px;
+  padding: 10px;
+  border: 2px solid red;
+  margin: 10px 0;
 }
 .card__title {
   text-align: center;
   font-weight: 800;
-  color: #bb4c55;
+  color: #532380;
 }
 .card__subtitle {
   text-align: center;
-  color: #666;
+  color: white;
   font-weight: 500;
+  font-size: 30px;
 }
 .bio {
   font-weight: bold;
+  padding: 50px 0;
+  border: 2px solid whitesmoke;
+  margin: 20px 0 150px;
+  color: white;
+  border-radius: 16px;
 }
 .button {
   background: #bb4c55;
@@ -79,17 +91,21 @@ img {
   cursor: not-allowed;
   background: #cecece;
 }
-.messages {
-  border: 2px solid black;
-  padding: 5px;
-  margin-bottom: 5px;
-}
 h1 {
+  color: white;
+  font-size: 35px;
+  padding: 20px;
+}
+h3 {
+  color: white;
+}
+nav, a {
   text-align: center;
-  color: red;
-  font-size: 2.5rem;
+  text-decoration: none;
+  color: #999;
+}
+.router-link-active {
   font-weight: bold;
-  border-bottom: 3px blue solid;
-  margin: 30px 15px;
+  color: whitesmoke;
 }
 </style>
