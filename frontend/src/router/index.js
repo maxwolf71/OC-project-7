@@ -3,6 +3,8 @@ import Feed from '../views/Feed.vue'
 import Login from '../views/Login.vue'
 import Message from '../views/Message.vue'
 import Profile from '../views/Profile.vue'
+import NotFound from '../views/NotFound.vue'
+import OneMessage from '../views/OneMessage.vue'
 
 const routes = [
     {
@@ -36,7 +38,22 @@ const routes = [
         meta: {
             title: 'Message'
         }
-    },
+    }, {
+        name: 'NotFound',
+        path: '/:pathMatch(.*)',
+        component: NotFound,
+        meta: {
+            title: '404 not found'
+        }
+    } , {
+        name: 'OneMessage',
+        path: '/onemessage',
+        component: OneMessage,
+        meta: {
+            title: 'OneMessage'
+        }
+    }
+    
 ]
 
 const router = createRouter({

@@ -4,9 +4,10 @@
 
     <div class="card" v-for="message in messages" :key="message">
       <h1 class="card__title" >{{ message.User.firstName }} {{ message.User.lastName }}</h1>
-      <h3>{{ message. title}}</h3>
+      <h3 class="card__subtitle">{{ message.title}}</h3>
       <p class="card__title">{{ message.content }}</p>
-      <img :src="message.attachement" alt=""/>
+      <img :src="message.attachement" :alt="message.title"/> <br>
+      <button  @click="modifyMessage">Edit message</button>
     </div>
   </div>
 </template>
@@ -39,6 +40,11 @@ export default {
         console.log(err)
       })
   },
+  methods: {
+    modifyMessage() {
+      this.$router.push("/oneMessage")
+    }
+  }
 }
 </script>
 

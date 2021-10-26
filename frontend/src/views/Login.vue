@@ -14,6 +14,9 @@
         <div class="form_row">
             <input v-model="password" class="form-row__input" type="password" placeholder="Password">
         </div>
+        <div class="form-row" v-if="mode == 'create'">
+            <input v-model="bio" class="form-row__input" type="Bio" placeholder="Enter your information here">
+        </div>
         <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
             Email and/or password incorrect
         </div>
@@ -93,7 +96,8 @@ export default {
                 email: this.email,
                 firstName: this.firstName,
                 lastName: this.lastName,
-                password: this.password
+                password: this.password,
+                bio: this.bio
             }).then(function () {
                 self.login()
             })

@@ -7,17 +7,17 @@
 
                 <div class="formNewPost">
                     <label for="title"></label>
-                    <input name="title" class="contentNewPost" placeholder="Message title here" required v-model="title"><br>
+                    <input name="title" class="contentNewPost" placeholder="Message title here" v-model="title"><br>
                 </div>
 
                 <div class="formNewPost">
                     <label for="content"></label>
-                    <textarea name="content" class="contentNewPost" placeholder="Text content here" required v-model="content"></textarea> <br>
+                    <textarea name="content" class="contentNewPost" placeholder="Text content here" v-model="content"></textarea> <br>
                 </div>
 
                 <div class="formNewPost">
-                    <label for="image">
-                        <input class="imageNewPost" type="file" name="image" ref="image" v-on:change="upload"> <br>
+                    <label for="attachement">
+                        <input class="attachement" type="file" name="attachement"> <br>
                     </label>
                 </div>
 
@@ -38,7 +38,6 @@ export default {
     return {
       title: '',
       content: '',
-      attachement: null
     }
   },
   mounted() {
@@ -53,7 +52,7 @@ export default {
       const formCreate = document.getElementsByClassName("formCreate")[0]
       const token = this.$store.state.user.token
       let data = new FormData(formCreate)
-         
+          
       axios.post("http://localhost:3000/api/messages/new", data, {
           headers: {
               "Content-Type" : "application/json",
@@ -64,7 +63,7 @@ export default {
       {
           if (res) 
           {
-              this.$router.push("/feed")
+              this.$router.push("/feed") //go to message feed
           }
       })
       .catch(error => 

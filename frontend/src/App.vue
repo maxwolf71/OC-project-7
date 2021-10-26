@@ -4,12 +4,16 @@
     <router-link to="/feed">Message feed</router-link> |
     <router-link to="/message">Post a message</router-link>
     <router-view />
+    <Footer />
   </nav>
 </template>
 
 <script>
+import Footer from "@/components/Footer"
+
 export default {
   name: "App",
+  components: { Footer }
 }
 </script>
 
@@ -43,12 +47,12 @@ img {
   margin: 10px 0;
 }
 .card__title {
-  text-align: center;
+
   font-weight: 800;
   color: #532380;
 }
 .card__subtitle {
-  text-align: center;
+
   color: white;
   font-weight: 500;
   font-size: 30px;

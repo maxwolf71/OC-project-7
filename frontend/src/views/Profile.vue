@@ -1,7 +1,6 @@
 <template>
   <div>
     <Banner title="My Profile" />
-    
     <div class="card">
       <h1 class="card__title">{{ user.firstName }} {{ user.lastName }}</h1>
       <h3 class="card__subtitle">Bio : </h3>

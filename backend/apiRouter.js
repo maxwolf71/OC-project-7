@@ -14,13 +14,14 @@ exports.router = (function () {
     apiRouter.route('/users/createAccount/').post(usersCtrl.createAccount)
     apiRouter.route('/users/login/').post(usersCtrl.login)
     apiRouter.route('/users/infos/').get(usersCtrl.getUserInfos)
-    //apiRouter.route('/users/me/').put(usersCtrl.updateUserInfos)
+    apiRouter.route('/users/:id/').put(usersCtrl.updateUserInfos)
     //apiRouter.route('/users/delete').post(usersCtrl.deleteProfile)
 
     // Messages routes
-    apiRouter.route('/messages/new').post(multer, messagesCtrl.createMessage)
+    apiRouter.route('/messages/new/').post(multer, messagesCtrl.createMessage)
     apiRouter.route('/messages/').get(multer, messagesCtrl.listMessages)
-    apiRouter.route('/messages/:id').delete(messagesCtrl.deleteMessage)
+    apiRouter.route('/messages/:id/').get(multer, messagesCtrl.oneMessage)
+    apiRouter.route('/messages/:id/').delete(messagesCtrl.deleteMessage)
 
     // Likes routes
     //apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likePost)

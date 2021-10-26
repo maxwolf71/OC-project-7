@@ -10,7 +10,7 @@ const ITEMS_LIMIT = 50
 
 // Routes
 module.exports = {
-    createMessage: function (req, res) {
+    createMessage (req, res) {
         // Getting auth header
         const headerAuth = req.headers['authorization']
         const userId = jwtUtils.getUserId(headerAuth)
@@ -18,15 +18,14 @@ module.exports = {
         // constants
         const title = req.body.title
         const content = req.body.content
-        const attachement = req.body.file
 
         if (title == '' || content == '') {
             return res.status(400).json({ 'error': 'missing parameters' })
         }
 
-        /*if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
+        if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
             return res.status(400).json({ 'error': 'invalid parameters' })
-        }*/
+        }
 
         models.User.findOne({
             where: { id: userId }
@@ -58,8 +57,27 @@ module.exports = {
         })
         .catch(error => res.status(500).json({ error: 'unable to verify user' }))
     },
+    oneMessage(req,res) {
+        const headerAuth = req.headers['authorization']
+        const userId = jwtUtils.getUserId(headerAuth)
 
-    listMessages: function (req, res) {
+        models.Message.findOne({
+            attributes: ['id', 'userId', 'title', 'content', 'attachement'],
+            where: { id: req.param }
+        })
+        .then(message => {
+            if (message) {
+              res.status(201).json(message)
+            } else {
+              res.status(404).json({ 'error': 'message not found' })
+            }
+          })
+          .catch(function (err) {
+            res.status(500).json({ 'error': 'cannot fetch message' })
+          })
+    },
+
+    listMessages (req, res) {
         const fields = req.query.fields
         const limit = parseInt(req.query.limit)
         const offset = parseInt(req.query.offset)
@@ -70,7 +88,7 @@ module.exports = {
         }
 
         models.Message.findAll({
-            order: [(order != null) ? order.split(':') : ['createdAt', 'ASC']],
+            order: [(order != null) ? order.split(':') : ['createdAt', 'DESC']],
             attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
             limit: (!isNaN(limit)) ? limit : null,
             offset: (!isNaN(offset)) ? offset : null,
@@ -91,7 +109,7 @@ module.exports = {
             })
     },
 
-    deleteMessage: function (req, res) {
+    deleteMessage (req, res) {
         let headerAuth = req.headers['authorization']
         let userId = jwtUtils.getUserId(headerAuth)
 
