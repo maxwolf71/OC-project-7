@@ -1,8 +1,8 @@
 <template>
   <nav>
-    <router-link to="/profile">Profile</router-link> |
-    <router-link to="/feed">Message feed</router-link> |
-    <router-link to="/message">Post a message</router-link>
+    <router-link :to="{ name: 'Profile'}">Profile</router-link> |
+    <router-link :to="{ name: 'Feed'}">Message feed</router-link> |
+    <router-link :to="{ name: 'Message'}">Post a message</router-link>
     <router-view />
     <Footer />
   </nav>

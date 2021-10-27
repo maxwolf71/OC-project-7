@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router"
-import Feed from '../views/Feed.vue'
-import Login from '../views/Login.vue'
-import Message from '../views/Message.vue'
-import Profile from '../views/Profile.vue'
+import Feed from '../views/messages/Feed.vue'
+import Login from '../views/users/Login.vue'
+import Message from '../views/messages/Message.vue'
+import Profile from '../views/users/Profile.vue'
 import NotFound from '../views/NotFound.vue'
-import OneMessage from '../views/OneMessage.vue'
+import OneMessage from '../views/messages/OneMessage.vue'
 
 const routes = [
     {
-        name: 'login',
+        name: 'Login',
         path: '/',
         component: Login,
         meta: {
@@ -16,7 +16,7 @@ const routes = [
         }
     }, 
     {
-        name: 'profile',
+        name: 'Profile',
         path: '/profile',
         component: Profile,
         meta: {
@@ -24,7 +24,7 @@ const routes = [
         }
     },
     {
-        name: 'feed',
+        name: 'Feed',
         path: '/feed',
         component: Feed,
         meta: {
@@ -32,7 +32,7 @@ const routes = [
         }
     },
     {
-        name: 'message',
+        name: 'Message',
         path: '/message',
         component: Message,
         meta: {
@@ -47,7 +47,7 @@ const routes = [
         }
     } , {
         name: 'OneMessage',
-        path: '/onemessage',
+        path: '/onemessage/:id',
         component: OneMessage,
         meta: {
             title: 'OneMessage'

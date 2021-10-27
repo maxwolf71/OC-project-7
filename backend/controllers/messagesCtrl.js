@@ -58,12 +58,12 @@ module.exports = {
         .catch(error => res.status(500).json({ error: 'unable to verify user' }))
     },
     oneMessage(req,res) {
-        const headerAuth = req.headers['authorization']
-        const userId = jwtUtils.getUserId(headerAuth)
+
+        const id = req.params.id
 
         models.Message.findOne({
-            attributes: ['id', 'userId', 'title', 'content', 'attachement'],
-            where: { id: req.param }
+            attributes: ['id', 'title', 'content', 'attachement'],
+            where: { id: id }
         })
         .then(message => {
             if (message) {

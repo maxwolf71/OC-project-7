@@ -22,8 +22,7 @@ export default {
   name: "Profile",
   components: { Banner },
   mounted() {
-    if (this.$store.state.user.userId == -1) {
-      //if user id -1
+    if (this.$store.state.user.userId == -1) {  //if user doesn't exist
       this.$router.push("/") //go back to login
       return
     }

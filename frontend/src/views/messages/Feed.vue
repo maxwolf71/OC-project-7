@@ -2,12 +2,14 @@
   <div>
     <Banner title="Message feed" />
 
-    <div class="card" v-for="message in messages" :key="message">
-      <h1 class="card__title" >{{ message.User.firstName }} {{ message.User.lastName }}</h1>
-      <h3 class="card__subtitle">{{ message.title}}</h3>
-      <p class="card__title">{{ message.content }}</p>
-      <img :src="message.attachement" :alt="message.title"/> <br>
-      <button  @click="modifyMessage">Edit message</button>
+    <div class="card" v-for="message in messages" :key="message.id">
+      <router-link :to="{ name: 'OneMessage', params: { id: message.id }}">
+        <h1 class="card__title" >{{ message.User.firstName }} {{ message.User.lastName }}</h1>
+        <h3 class="card__subtitle">{{ message.title}}</h3>
+        <p class="card__title">{{ message.content }}</p>
+        <img :src="message.attachement" :alt="message.title"/> <br>
+        <h1>{{ message.id }}</h1>
+      </router-link>
     </div>
   </div>
 </template>
@@ -42,7 +44,7 @@ export default {
   },
   methods: {
     modifyMessage() {
-      this.$router.push("/oneMessage")
+      console.log('ok');
     }
   }
 }
