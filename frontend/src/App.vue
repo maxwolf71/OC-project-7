@@ -44,15 +44,13 @@ img {
   border-radius: 16px;
   padding: 10px;
   border: 2px solid red;
-  margin: 10px 0;
+  margin: 10px auto;
 }
 .card__title {
-
   font-weight: 800;
   color: #532380;
 }
 .card__subtitle {
-
   color: white;
   font-weight: 500;
   font-size: 30px;
@@ -78,7 +76,6 @@ img {
 }
 .card__action {
   color: #2196f3;
-  text-decoration: underline;
 }
 .card__action:hover {
   cursor: pointer;

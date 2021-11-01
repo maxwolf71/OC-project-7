@@ -14,7 +14,7 @@ exports.router = (function () {
     apiRouter.route('/users/createAccount/').post(usersCtrl.createAccount)
     apiRouter.route('/users/login/').post(usersCtrl.login)
     apiRouter.route('/users/infos/').get(usersCtrl.getUserInfos)
-    apiRouter.route('/users/:id/').put(usersCtrl.updateUserInfos)
+    apiRouter.route('/users/:id/').put(usersCtrl.updateUserBio)
     //apiRouter.route('/users/delete').post(usersCtrl.deleteProfile)
 
     // Messages routes

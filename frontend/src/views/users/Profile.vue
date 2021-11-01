@@ -6,6 +6,11 @@
       <h3 class="card__subtitle">Bio : </h3>
       <p class="bio">{{ user.bio }}</p>
       <div class="form_row">
+        <button @click="modifyBio()" class="button">
+          Modify Bio
+        </button>
+      </div>
+      <div class="form_row">
         <button @click="logout()" class="button">
           Sign out
         </button>
@@ -38,6 +43,9 @@ export default {
       this.$store.commit("logout")
       this.$router.push("/")
     },
+    modifyBio() {
+      console.log('modify bio');
+    }
   },
 }
 </script>

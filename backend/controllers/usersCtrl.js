@@ -151,7 +151,7 @@ module.exports = {
       })
   },
   // UPDATE USER PROFILE ***********************************************************************
-  updateUserInfos: function (req, res) {
+  updateUserBio: function (req, res) {
     const headerAuth = req.headers['authorization']
     const userId = jwtUtils.getUserId(headerAuth)
 
@@ -175,9 +175,11 @@ module.exports = {
         if (userFound)  {
           userFound.update({
             bio: (bio ? bio : userFound.bio)
-          }).then(function () {
+          })
+          .then(function () {
             done(userFound)
-          }).catch(function (err) {
+          })
+          .catch(function (err) {
             return res.status(500).json({ 'error': 'cannot update user' })
           })
         } else {

@@ -10,7 +10,7 @@ const ITEMS_LIMIT = 50
 
 // Routes
 module.exports = {
-    createMessage (req, res) {
+    createMessage(req, res) {
         // Getting auth header
         const headerAuth = req.headers['authorization']
         const userId = jwtUtils.getUserId(headerAuth)
@@ -30,34 +30,34 @@ module.exports = {
         models.User.findOne({
             where: { id: userId }
         })
-        .then(userFound => {
-            if (userFound) {
-                if (req.file == null) {
-                    models.Message.create({
-                        title: title,
-                        content: content,
-                        attachement: 0,
-                        likes: 0,
-                        UserId: userFound.id
-                    })
-                    .then(newMessage => res.status(201).json(newMessage))
-                    .catch(err => res.status(404).json({ error: 'user not found' }))
-                } else {
-                    models.Message.create({
-                        title: title,
-                        content: content,
-                        attachement: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-                        likes: 0,
-                        UserId: userFound.id
-                    })
-                    .then(newMessage => res.status(201).json(newMessage))
-                    .catch(err => res.status(404).json({ error: 'user not found' }))
+            .then(userFound => {
+                if (userFound) {
+                    if (req.file == null) {
+                        models.Message.create({
+                            title: title,
+                            content: content,
+                            attachement: 0,
+                            likes: 0,
+                            UserId: userFound.id
+                        })
+                            .then(newMessage => res.status(201).json(newMessage))
+                            .catch(err => res.status(404).json({ error: 'user not found' }))
+                    } else {
+                        models.Message.create({
+                            title: title,
+                            content: content,
+                            attachement: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+                            likes: 0,
+                            UserId: userFound.id
+                        })
+                            .then(newMessage => res.status(201).json(newMessage))
+                            .catch(err => res.status(404).json({ error: 'user not found' }))
+                    }
                 }
-            }
-        })
-        .catch(error => res.status(500).json({ error: 'unable to verify user' }))
+            })
+            .catch(error => res.status(500).json({ error: 'unable to verify user' }))
     },
-    oneMessage(req,res) {
+    oneMessage(req, res) {
 
         const id = req.params.id
 
@@ -65,19 +65,19 @@ module.exports = {
             attributes: ['id', 'title', 'content', 'attachement'],
             where: { id: id }
         })
-        .then(message => {
-            if (message) {
-              res.status(201).json(message)
-            } else {
-              res.status(404).json({ 'error': 'message not found' })
-            }
-          })
-          .catch(function (err) {
-            res.status(500).json({ 'error': 'cannot fetch message' })
-          })
+            .then(message => {
+                if (message) {
+                    res.status(201).json(message)
+                } else {
+                    res.status(404).json({ 'error': 'message not found' })
+                }
+            })
+            .catch(function (err) {
+                res.status(500).json({ 'error': 'cannot fetch message' })
+            })
     },
 
-    listMessages (req, res) {
+    listMessages(req, res) {
         const fields = req.query.fields
         const limit = parseInt(req.query.limit)
         const offset = parseInt(req.query.offset)
@@ -97,63 +97,48 @@ module.exports = {
                 attributes: ['firstName', 'lastName']
             }]
         })
-            .then(function (messages) {
+            .then(messages => {
                 if (messages) {
                     res.status(200).json(messages)
                 } else {
                     res.status(404).json({ "error": "no messages found" })
                 }
-            }).catch(function (err) {
+            }).catch(err => {
                 console.log(err)
                 res.status(500).json({ "error": "invalid fields" })
             })
     },
 
-    deleteMessage (req, res) {
-        let headerAuth = req.headers['authorization']
-        let userId = jwtUtils.getUserId(headerAuth)
+    deleteMessage: async (req, res) => {
+        const headerAuth = req.headers['authorization'];
+        const userId = jwtUtils.getUserId(headerAuth);
 
-        main()
+        const Messages = models.Message;
+        const attachement = Messages.attachement
 
-        async function main() {
-
-            let isAdmin = await isAdmin2()
-
-            if (userId < 1)
-                return res.status(400).json({ 'error': 'Wrong token' })
-
-            if (isAdmin || userId >= 1) {
-
-                models.Message.findOne({ where: { id: req.params.id } })
-                    .then(mess => {
-                        if (mess.attachement != null) { // If there is an attachment
-                            const filename = mess.attachement.split('/images/')[1]
-                            fs.unlink(`images/${filename}`, (err) => {
-                                if (err) {
-                                    console.log("failed to delete local image:" + err)
-                                } else {
-                                    console.log('successfully deleted local image')
-                                }
-                            })
-                        } else { }
-                        models.Message.destroy({
-                            attributes: ['title', 'content', 'attachement'],
-                            where: { id: req.params.id }
-                        }).then(function (mess) {
-                            if (mess) {
-                                res.status(201).json({ "success": "Message deleted" })
-                            } else {
-                                res.status(404).json({ 'error': 'Message not found' })
-                            }
-                        }).catch(function (err) {
-                            res.status(500).json({ 'error': 'cannot fetch message' })
-                        })
-                    })
+        Messages.findOne({
+            where: {
+                id: req.params.id,
             }
-        }
-        function isAdmin2() {
-            return models.User.findOne({ attributes: ['isAdmin'], where: { id: userId } })
-        } 
-
+        })
+        .then(message => {
+            if (message.UserId == userId) {
+                if (attachement !== null) {
+                    const filename = message.attachement.split('/images/')[1];
+                    fs.unlink(`images/${filename}`, () => {
+                        Messages.destroy({ where: { id: req.params.id } })
+                            .then(() => res.status(200).json({ message: 'Message and image deleted !' }))
+                            .catch(error => res.status(400).json({ error }))
+                    })
+                } else {
+                    Messages.destroy({ where: { id: req.params.id } })
+                        .then(() => res.status(200).json({ message: 'Message deleted !' }))
+                        .catch(error => res.status(400).json({ error }))
+                }
+            } else {
+                res.status(404).json({ 'error': "'You\'re not authorized to remove this message'" })
+            }
+        })
+        .catch(error => res.status(500).json({ message: "Message not found" }))
     }
 }

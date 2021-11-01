@@ -15,10 +15,10 @@
             <input v-model="password" class="form-row__input" type="password" placeholder="Password">
         </div>
         <div class="form-row" v-if="mode == 'create'">
-            <input v-model="bio" class="form-row__input" type="Bio" placeholder="Enter your information here">
+            <input v-model="bio" class="form-row__input" type="Bio" placeholder="Enter a short bio (optional)">
         </div>
         <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
-            Email and/or password incorrect
+            Email and/or password incorrect !
         </div>
         <div class="form-row" v-if="mode == 'create' && status == 'error_create'">
             Email address already used !

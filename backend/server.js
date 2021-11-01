@@ -6,8 +6,6 @@ const cors = require('cors') // Deal with cor errors
 
 const server = express() // Instance of server 
 
-require('dotenv').config()
-
 server.use(cors())
 
 server.use(express.json()) // Body-parser deprecated
