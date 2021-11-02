@@ -24,7 +24,8 @@ module.exports = {
             try {
                 const jwtToken = jwt.verify(token, JWT_SIGN_SECRET)
                 if (jwtToken != null) {
-                    userId = jwtToken.userId
+                    userId = jwtToken.userId,
+                    isAdmin = jwtToken.isAdmin
                 }
             } catch(err) { }
         }

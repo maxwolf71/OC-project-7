@@ -41,11 +41,6 @@ export default {
         console.log(err)
       })
   },
-  methods: {
-    modifyMessage() {
-      console.log('ok');
-    }
-  }
 }
 </script>
 

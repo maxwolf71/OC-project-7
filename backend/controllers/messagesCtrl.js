@@ -122,7 +122,7 @@ module.exports = {
             }
         })
         .then(message => {
-            if (message.UserId == userId) {
+            if (message.UserId == userId || isAdmin === true) {
                 if (attachement !== null) {
                     const filename = message.attachement.split('/images/')[1];
                     fs.unlink(`images/${filename}`, () => {

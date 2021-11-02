@@ -1,9 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router"
-import Feed from '../views/messages/Feed.vue'
+
+// Users imports
 import Login from '../views/users/Login.vue'
-import Message from '../views/messages/Message.vue'
 import Profile from '../views/users/Profile.vue'
 import NotFound from '../views/NotFound.vue'
+import Bio from '../views/users/Bio.vue'
+
+// Messages imports
+import Feed from '../views/messages/Feed.vue'
+import Message from '../views/messages/Message.vue'
 import OneMessage from '../views/messages/OneMessage.vue'
 
 const routes = [
@@ -14,7 +19,7 @@ const routes = [
         meta: {
             title: 'Login'
         }
-    }, 
+    },
     {
         name: 'Profile',
         path: '/profile',
@@ -38,22 +43,31 @@ const routes = [
         meta: {
             title: 'Message'
         }
-    }, {
+    },
+    {
         name: 'NotFound',
         path: '/:pathMatch(.*)',
         component: NotFound,
         meta: {
             title: '404 not found'
         }
-    } , {
+    },
+    {
         name: 'OneMessage',
         path: '/onemessage/:id',
         component: OneMessage,
         meta: {
             title: 'OneMessage'
         }
-    }
-    
+    },
+    {
+        name: 'Bio',
+        path: '/bio/:id',
+        component: Bio,
+        meta: {
+            title: 'Bio'
+        }
+    },
 ]
 
 const router = createRouter({

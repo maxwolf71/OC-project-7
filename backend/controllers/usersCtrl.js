@@ -84,7 +84,7 @@ module.exports = {
       function (newUser) {
         if (newUser) {
           return res.status(201).json({
-            'userId': newUser.id
+            'userId': newUser.id,
           })
         } else {
           return res.status(500).json({ 'error': 'cannot add user' })
@@ -100,7 +100,7 @@ module.exports = {
     const password = req.body.password
 
     if (email == null || password == null) {
-      ret
+      return res.status(403).json({ 'error': 'missing parameters' })
     }
 
     models.User.findOne({
@@ -112,7 +112,8 @@ module.exports = {
             if (resBycrypt) {
               return res.status(200).json({
                 'userId': userFound.id,
-                'token': jwtUtils.generateTokenForUser(userFound)
+                'token': jwtUtils.generateTokenForUser(userFound),
+                'isAdmin': userFound.isAdmin,
               })
             } else {
               return res.status(403).json({ 'error': 'invalid password' })
@@ -150,6 +151,7 @@ module.exports = {
         res.status(500).json({ 'error': 'cannot fetch user' })
       })
   },
+  /*
   // UPDATE USER PROFILE ***********************************************************************
   updateUserBio: function (req, res) {
     const headerAuth = req.headers['authorization']
@@ -193,6 +195,6 @@ module.exports = {
         return res.status(500).json({ 'error': 'cannot update user profile' })
       }
     })
-  }
+  }*/
 }
 
