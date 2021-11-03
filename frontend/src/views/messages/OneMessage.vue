@@ -2,10 +2,12 @@
   <div>
     <Banner title="Message view" />
     <div class="card">
-      <h1>{{ messages.title }}</h1>
-      <h3>{{ messages.content }}</h3>
-      <img :src="messages.attachement" alt="" />
-      <button @click="deleteMessage" class="button">Delete</button><br />
+      <h1>{{ message.title }}</h1>
+      <h3>{{ message.content }}</h3>
+      <img :src="message.attachement" alt="" />
+      <div v-if="message.userId == this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
+        <button @click="deleteMessage" class="button">Delete</button>
+      </div>
     </div>
   </div>
 </template>
@@ -19,7 +21,7 @@ export default {
   components: { Banner },
   data() {
     return {
-      messages: [],
+      message: [],
     }
   },
   mounted() {
@@ -32,8 +34,8 @@ export default {
 
       axios
         .get(`http://localhost:3000/api/messages/${messageId}`)
-        .then((response) => {
-          this.messages = response.data
+        .then(response => {
+          this.message = response.data
         })
         .catch((err) => {
           console.log(err)

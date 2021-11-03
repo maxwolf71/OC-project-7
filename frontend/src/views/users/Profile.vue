@@ -7,10 +7,11 @@
       <router-link :to="{ name: 'Bio', params: { id: this.$store.state.user.userId } }">
         <p class="bio">{{ user.bio }}</p>
       </router-link>
-      <div class="form_row">
+      <div class="form_row" v-if="user.id == this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
+        <button @click="logout" class="button">Delete account</button>
       </div>
       <div class="form_row">
-        <button @click="logout()" class="button">Sign out</button>
+        <button @click="logout" class="button">Sign out</button>
       </div>
     </div>
   </div>

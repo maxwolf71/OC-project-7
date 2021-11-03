@@ -62,7 +62,7 @@ module.exports = {
         const id = req.params.id
 
         models.Message.findOne({
-            attributes: ['id', 'title', 'content', 'attachement'],
+            attributes: ['id', 'userId', 'title', 'content', 'attachement'],
             where: { id: id }
         })
             .then(message => {

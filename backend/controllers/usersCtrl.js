@@ -16,11 +16,11 @@ module.exports = {
   createAccount: function (req, res) {
 
     // Params
-    const email     = req.body.email
+    const email = req.body.email
     const firstName = req.body.firstName
-    const lastName  = req.body.lastName
-    const password  = req.body.password
-    const bio       = req.body.bio
+    const lastName = req.body.lastName
+    const password = req.body.password
+    const bio = req.body.bio
 
     if (email == null || firstName == null || lastName == null || password == null) {
       return res.status(400).json({ 'error': 'missing parameters' })
@@ -29,7 +29,7 @@ module.exports = {
     if (firstName.length >= 15 || firstName.length <= 2) {
       return res.status(400).json({ 'error': 'wrong first name (must be length 3 - 16)' })
     }
-    
+
     if (lastName.length >= 19 || lastName.length <= 2) {
       return res.status(400).json({ 'error': 'wrong first name (must be length 3 - 20)' })
     }
@@ -151,6 +151,29 @@ module.exports = {
         res.status(500).json({ 'error': 'cannot fetch user' })
       })
   },
+
+  // DELETE USER PROFILE ***********************************************************************
+  deleteProfile: async (req, res) => {
+    const headerAuth = req.headers['authorization'];
+    const userId = jwtUtils.getUserId(headerAuth);
+
+    models.User.findOne({
+        where: {
+            id: req.params.id,
+        }
+    })
+    .then(user => {
+        if (user.id = userId || isAdmin === true) {
+          user.destroy()
+          .then(() => res.status(201).json({ message: 'User profile deleted !' }))
+          .catch(error => res.status(400).json({ error: 'You don\' have sufficient rights to delete this profile !' }))
+        } else {
+          res.status(404).json({ message: 'Unable to delete user profile' })
+        }
+    })
+    .catch(error => res.status(500).json({ message: "User not found" })) 
+  }
+
   /*
   // UPDATE USER PROFILE ***********************************************************************
   updateUserBio: function (req, res) {
