@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Messages', {
@@ -24,14 +24,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      attachement: {
+      attachment: {
         allowNull: true,
         type: Sequelize.STRING
       },
-      /*likes: {
+      likes: {
         allowNull: false,
         type: Sequelize.INTEGER
-      },*/
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -40,9 +40,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    })
+    });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Messages')
+    await queryInterface.dropTable('Messages');
   }
-}
+};

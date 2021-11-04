@@ -36,9 +36,9 @@ module.exports = {
                         models.Message.create({
                             title: title,
                             content: content,
-                            attachement: 0,
+                            attachment: 0,
                             likes: 0,
-                            UserId: userFound.id
+                            UserId: userFound.id // create unique user id for message
                         })
                             .then(newMessage => res.status(201).json(newMessage))
                             .catch(err => res.status(404).json({ error: 'user not found' }))
@@ -46,7 +46,7 @@ module.exports = {
                         models.Message.create({
                             title: title,
                             content: content,
-                            attachement: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+                            attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
                             likes: 0,
                             UserId: userFound.id
                         })
@@ -62,7 +62,7 @@ module.exports = {
         const id = req.params.id
 
         models.Message.findOne({
-            attributes: ['id', 'userId', 'title', 'content', 'attachement'],
+            attributes: ['id', 'userId', 'title', 'content', 'attachment'],
             where: { id: id }
         })
             .then(message => {
@@ -114,7 +114,7 @@ module.exports = {
         const userId = jwtUtils.getUserId(headerAuth);
 
         const Messages = models.Message;
-        const attachement = Messages.attachement
+        const attachment = Messages.attachment
 
         Messages.findOne({
             where: {
@@ -123,8 +123,8 @@ module.exports = {
         })
         .then(message => {
             if (message.UserId == userId || isAdmin === true) {
-                if (attachement !== null) {
-                    const filename = message.attachement.split('/images/')[1];
+                if (attachment !== null) {
+                    const filename = message.attachment.split('/images/')[1];
                     fs.unlink(`images/${filename}`, () => {
                         Messages.destroy({ where: { id: req.params.id } })
                             .then(() => res.status(200).json({ message: 'Message and image deleted !' }))

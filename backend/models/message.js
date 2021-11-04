@@ -11,19 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
       models.Message.belongsTo(models.User, {
-        foreignKey: false
+        foreignKey: {
+          allowNull: false
+        }
       })
     }
-  }
+  };
   Message.init({
     title: DataTypes.STRING,
     content: DataTypes.STRING,
-    attachement: DataTypes.STRING,
+    attachment: DataTypes.STRING,
     likes: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Message',
-  })
+  });
   return Message;
-}
+};

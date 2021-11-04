@@ -45,7 +45,6 @@ module.exports = {
     asyncLib.waterfall([
       function (done) {
         models.User.findOne({
-          attributes: ['email'],
           where: { email: email }
         })
           .then(userFound => {
@@ -106,7 +105,7 @@ module.exports = {
     models.User.findOne({
       where: { email: email }
     })
-      .then(function (userFound) {
+      .then(userFound => {
         if (userFound) {
           bcrypt.compare(password, userFound.password, function (errBycrypt, resBycrypt) {
             if (resBycrypt) {

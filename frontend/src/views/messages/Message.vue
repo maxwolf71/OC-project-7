@@ -26,8 +26,8 @@
         </div>
 
         <div class="formNewPost">
-          <label for="attachement">
-            <input class="attachement" type="file" name="attachement" /> <br />
+          <label for="attachment">
+            <input class="attachment" type="file" name="attachment" /> <br />
           </label>
         </div>
 

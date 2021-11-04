@@ -7,7 +7,7 @@
       <router-link :to="{ name: 'Bio', params: { id: this.$store.state.user.userId } }">
         <p class="bio">{{ user.bio }}</p>
       </router-link>
-      <div class="form_row" v-if="user.id == this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
+      <div class="form_row" v-if="userId == this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
         <button @click="logout" class="button">Delete account</button>
       </div>
       <div class="form_row">
@@ -31,6 +31,7 @@ export default {
       return
     }
     this.$store.dispatch("getUserInfos") // retrieve user infos
+    console.log(this.$store.state.user.isAdmin);
   },
   computed: {
     ...mapState({
