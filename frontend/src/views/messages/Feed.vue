@@ -7,7 +7,7 @@
         <h1 class="card__title" >{{ message.User.firstName }} {{ message.User.lastName }}</h1>
         <h3 class="card__subtitle">{{ message.title}}</h3>
         <p class="card__title">{{ message.content }}</p>
-        <img :src="message.attachement" :alt="message.title"/>
+        <img :src="message.attachment" :alt="message.title"/>
       </router-link>
     </div>
   </div>

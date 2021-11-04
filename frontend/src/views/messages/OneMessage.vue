@@ -4,7 +4,7 @@
     <div class="card">
       <h1>{{ message.title }}</h1>
       <h3>{{ message.content }}</h3>
-      <img :src="message.attachement" alt="" />
+      <img :src="message.attachment" alt="" />
       <div v-if="message.userId == this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
         <button @click="deleteMessage" class="button">Delete</button>
       </div>
