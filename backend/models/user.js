@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.User.hasMany(models.Message)
     }
-  };
+  }
   User.init({
     email: DataTypes.STRING,
     firstName: DataTypes.STRING,
@@ -24,6 +24,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
-  });
-  return User;
-};
+  })
+  return User
+}

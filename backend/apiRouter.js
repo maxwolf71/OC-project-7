@@ -2,7 +2,7 @@
 const express      = require('express')
 const usersCtrl    = require('./controllers/usersCtrl')
 const messagesCtrl = require('./controllers/messagesCtrl')
-//const likesCtrl    = require('./routes/likesCtrl')
+//const likesCtrl    = require('./controllers/likesCtrl')
 
 const multer = require('./middleware/multer-config')
 
