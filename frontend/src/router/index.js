@@ -7,9 +7,9 @@ import NotFound from '../views/NotFound.vue'
 import Bio from '../views/users/Bio.vue'
 
 // Messages imports
-import Feed from '../views/messages/Feed.vue'
-import Message from '../views/messages/Message.vue'
-import OneMessage from '../views/messages/OneMessage.vue'
+import Feed from '../views/messages/Feed.vue' // display all messages
+import CreateMessage from '../views/messages/CreateMessage.vue' // post a message
+import OneMessage from '../views/messages/OneMessage.vue' // show single message
 
 const routes = [
     {
@@ -37,19 +37,11 @@ const routes = [
         }
     },
     {
-        name: 'Message',
-        path: '/message',
-        component: Message,
+        name: 'CreateMessage',
+        path: '/createmessage',
+        component: CreateMessage,
         meta: {
-            title: 'Message'
-        }
-    },
-    {
-        name: 'NotFound',
-        path: '/:pathMatch(.*)',
-        component: NotFound,
-        meta: {
-            title: '404 not found'
+            title: 'CreateMessage'
         }
     },
     {
@@ -66,6 +58,14 @@ const routes = [
         component: Bio,
         meta: {
             title: 'Bio'
+        }
+    },
+    {
+        name: 'NotFound',
+        path: '/:pathMatch(.*)',
+        component: NotFound,
+        meta: {
+            title: '404 not found'
         }
     },
 ]

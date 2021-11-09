@@ -1,6 +1,6 @@
 <template>
   <div class="createPost">
-    <Banner title="Post a message" />
+    <Nav title="Post a message" />
     <h2>Enter you text here :</h2>
     <div class="newPost">
       <form class="formCreate" @submit.prevent="createMessage">
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import Banner from "@/components/Banner"
+import Nav from "@/components/Nav"
 import axios from "axios"
 
 export default {
@@ -56,7 +56,7 @@ export default {
       return
     }
   },
-  components: { Banner },
+  components: { Nav },
   methods: {
     createMessage() {
       const formCreate = document.getElementsByClassName("formCreate")[0]

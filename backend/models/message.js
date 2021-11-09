@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Message extends Model {
     /**
@@ -12,14 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
-      models.Message.belongsTo(models.User, {
-        foreignKey: {
-          allowNull: false
-        }
-      })
+      models.Message.belongsTo(models.User, { foreignKey: 'userId' })
+      
+      models.Message.hasMany(models.Like, { onDelete : 'cascade' })
+      //models.Message.hasMany(models.Comment, { onDelete : 'cascade' })
     }
-  };
+  }
   Message.init({
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
     title: DataTypes.STRING,
     content: DataTypes.STRING,
     attachment: DataTypes.STRING,
@@ -27,6 +28,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Message',
-  });
-  return Message;
-};
+  })
+  return Message
+}

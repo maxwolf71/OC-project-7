@@ -1,19 +1,13 @@
 <template>
   <nav>
-    <router-link :to="{ name: 'Profile'}">Profile</router-link> |
-    <router-link :to="{ name: 'Feed'}">Message feed</router-link> |
-    <router-link :to="{ name: 'Message'}">Post a message</router-link>
     <router-view />
-    <Footer />
   </nav>
 </template>
 
 <script>
-import Footer from "@/components/Footer"
 
 export default {
-  name: "App",
-  components: { Footer }
+  name: "App"
 }
 </script>
 
@@ -55,6 +49,13 @@ img {
   font-weight: 500;
   font-size: 30px;
 }
+.card__action {
+  color: #2196f3;
+}
+.card__action:hover {
+  cursor: pointer;
+}
+
 .bio {
   font-weight: bold;
   padding: 50px 0;
@@ -73,12 +74,7 @@ img {
   width: 100%;
   padding: 16px;
   transition: 0.4s background-color;
-}
-.card__action {
-  color: #2196f3;
-}
-.card__action:hover {
-  cursor: pointer;
+  margin-bottom: 15px;
 }
 .button:hover {
   cursor: pointer;

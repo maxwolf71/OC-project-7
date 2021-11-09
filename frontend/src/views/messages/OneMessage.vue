@@ -1,24 +1,29 @@
 <template>
   <div>
-    <Banner title="Message view" />
+    <Nav title="Message view" />
     <div class="card">
-      <h1>{{ message.title }}</h1>
+      <h3>{{ message.title }}</h3>
+      <h3>by {{ message.firstName }} {{ message.lastName }}</h3>
+      <img :src="message.attachment" alt="message-image" />
       <h3>{{ message.content }}</h3>
-      <img :src="message.attachment" alt="" />
       <div v-if="message.userId == this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
         <button @click="deleteMessage" class="button">Delete</button>
+      </div>
+      <div class="" v-else>
+        <Like />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Banner from "@/components/Banner"
+import Nav from "@/components/Nav"
+import Like from "@/components/Like"
 import axios from "axios"
 
 export default {
   name: "OneMessage",
-  components: { Banner },
+  components: { Nav, Like },
   data() {
     return {
       message: [],
@@ -38,7 +43,7 @@ export default {
           this.message = response.data
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err.message)
         })
     },
     //  Delete message ***********************************************************
@@ -53,14 +58,14 @@ export default {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((res) => {
+        .then(res => {
           if (res) {
             this.$router.push("/feed") //go to message feed
             alert("You're message has been deleted")
           }
         })
-        .catch((error) => {
-          console.log(error.message)
+        .catch(error => {
+          console.log(error)
           alert("You can't delete messages other than your own !")
         })
     },
