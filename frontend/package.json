@@ -2,7 +2,11 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+<<<<<<< HEAD
   "type": "module",
+=======
+  "type":"module",
+>>>>>>> 4123c0718514819f273857c3d4c64b5cd59e92e5
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
