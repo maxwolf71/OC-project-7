@@ -1,3 +1,4 @@
+
 'use strict'
 const {
   Model
@@ -11,16 +12,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.User.belongsToMany(models.Message, {
-        through: models.Like,
-        foreignKey: 'userId',
-        otherKey: 'messageId'
-      })
-      models.Message.belongsToMany(models.User, {
-        through: models.Like,
-        foreignKey: 'messageId',
-        otherKey: 'userId'
-      })
 
       models.Like.belongsTo(models.User, {
         foreignKey: 'userId',
@@ -47,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
-    
+
   }, {
     sequelize,
     modelName: 'Like',

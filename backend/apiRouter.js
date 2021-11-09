@@ -2,7 +2,7 @@
 const express      = require('express')
 const usersCtrl    = require('./controllers/usersCtrl')
 const messagesCtrl = require('./controllers/messagesCtrl')
-//const likesCtrl    = require('./controllers/likesCtrl')
+const likesCtrl    = require('./controllers/likesCtrl')
 
 const multer = require('./middleware/multer-config')
 
@@ -24,8 +24,7 @@ exports.router = (function () {
     apiRouter.route('/messages/:id/').delete(messagesCtrl.deleteMessage)
 
     // Likes routes
-    //apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likePost)
-    //apiRouter.route('/messages/:messageId/vote/dislike').post(likesCtrl.dislikePost)
+    apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likeMessage)
 
     return apiRouter
 })() // instance of router

@@ -1,6 +1,6 @@
 <template>
   <div class="createPost">
-    <Banner title="Edit Bio" />
+    <Nav title="Edit Bio" />
     <div class="newPost">
       <form class="formCreate" @submit.prevent="editBio">
         <div class="formNewPost">
@@ -21,12 +21,12 @@
 </template>
 
 <script>
-import Banner from "@/components/Banner"
+import Nav from "@/components/Nav"
 import axios from "axios"
 
 export default {
   name: "Bio",
-  components: { Banner },
+  components: { Nav },
   data() {
     return {
       bio: "",

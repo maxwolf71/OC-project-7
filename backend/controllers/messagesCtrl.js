@@ -20,11 +20,11 @@ module.exports = {
         const content = req.body.content
 
         if (title == '' || content == '') {
-            return res.status(400).json({ 'error': 'missing parameters' })
+            return res.status(400).json({ 'error': 'Please fill title and content fields !' })
         }
 
         if (title.length <= TITLE_LIMIT || content.length <= CONTENT_LIMIT) {
-            return res.status(400).json({ 'error': 'invalid parameters' })
+            return res.status(400).json({ 'error': 'Title length too long/short !' })
         }
 
         models.User.findOne({
@@ -32,26 +32,30 @@ module.exports = {
         })
             .then(userFound => {
                 if (userFound) {
-                    if (req.file == null) {
+                    if (req.file == null) { // If no image
                         models.Message.create({
+                            firstName: userFound.firstName,
+                            lastName: userFound.lastName,
                             title: title,
                             content: content,
                             attachment: 0,
                             likes: 0,
-                            UserId: userFound.id // create unique user id for message
+                            UserId: userFound.id, // create unique user id for message
                         })
                             .then(newMessage => res.status(201).json(newMessage))
-                            .catch(err => res.status(404).json({ error: 'user not found' }))
-                    } else {
+                            .catch(error => res.status(404).json({ error: 'user not found' }))
+                    } else { // if image
                         models.Message.create({
+                            firstName: userFound.firstName,
+                            lastName: userFound.lastName,
                             title: title,
                             content: content,
                             attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
                             likes: 0,
-                            UserId: userFound.id
+                            UserId: userFound.id, // create unique user id for message
                         })
                             .then(newMessage => res.status(201).json(newMessage))
-                            .catch(err => res.status(404).json({ error: 'user not found' }))
+                            .catch(error => res.status(404).json({ error: 'user not found' }))
                     }
                 }
             })
@@ -62,7 +66,7 @@ module.exports = {
         const id = req.params.id
 
         models.Message.findOne({
-            attributes: ['id', 'userId', 'title', 'content', 'attachment'],
+            attributes: ['id', 'firstName', 'lastName', 'title', 'content', 'attachment', 'likes'],
             where: { id: id }
         })
             .then(message => {
@@ -86,16 +90,11 @@ module.exports = {
         if (limit > ITEMS_LIMIT) {
             limit = ITEMS_LIMIT
         }
-
         models.Message.findAll({
             order: [(order != null) ? order.split(':') : ['createdAt', 'DESC']],
             attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
             limit: (!isNaN(limit)) ? limit : null,
             offset: (!isNaN(offset)) ? offset : null,
-            include: [{
-                model: models.User,
-                attributes: ['firstName', 'lastName']
-            }]
         })
             .then(messages => {
                 if (messages) {
@@ -108,7 +107,6 @@ module.exports = {
                 res.status(500).json({ "error": "invalid fields" })
             })
     },
-
     deleteMessage: async (req, res) => {
         const headerAuth = req.headers['authorization'];
         const userId = jwtUtils.getUserId(headerAuth);
