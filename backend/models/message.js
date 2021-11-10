@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
 
       models.Message.belongsTo(models.User, { foreignKey: 'userId' })
 
-      models.Message.hasMany(models.Like, { onDelete : 'cascade' })
-      models.Message.hasMany(models.Comment, { onDelete : 'cascade' })
+      //models.Message.hasMany(models.Like, { onDelete : 'cascade' })
+      //models.Message.hasMany(models.Comment, { onDelete : 'cascade' })
     }
   }
   Message.init({

@@ -4,7 +4,9 @@
     <div class="card">
       <h3>{{ message.title }}</h3>
       <h3>by {{ message.firstName }} {{ message.lastName }}</h3>
-      <img :src="message.attachment" alt="message-image" />
+      <div v-if="message.attachment !== '0'">
+        <img :src="message.attachment" alt="message-image" />
+      </div>
       <h3>{{ message.content }}</h3>
       <div v-if="message.userId == this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
         <button @click="deleteMessage" class="button">Delete</button>

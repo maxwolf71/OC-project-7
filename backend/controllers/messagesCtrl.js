@@ -63,11 +63,9 @@ module.exports = {
     },
     oneMessage(req, res) {
 
-        const id = req.params.id
-
         models.Message.findOne({
             attributes: ['id', 'userId', 'firstName', 'lastName', 'title', 'content', 'attachment', 'likes'],
-            where: { id: id }
+            where: { id: req.params.id }
         })
             .then(message => {
                 if (message) {
@@ -111,7 +109,7 @@ module.exports = {
         const headerAuth = req.headers['authorization'];
         const userId = jwtUtils.getUserId(headerAuth);
 
-        const Messages = models.Message;
+        const Messages = models.Message
         const attachment = Messages.attachment
 
         Messages.findOne({
@@ -137,6 +135,6 @@ module.exports = {
                 res.status(404).json({ 'error': "'You\'re not authorized to remove this message'" })
             }
         })
-        .catch(error => res.status(500).json({ message: "Message not found" }))
+        .catch(error => res.status(500).json({ error }))
     }
 }
