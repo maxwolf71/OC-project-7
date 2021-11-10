@@ -7,7 +7,7 @@ const disliked = -1
 
 // Routes
 module.exports = {
-  // LIKE Message  ***********************************************************************
+  // LIKE, UNLIKE Message  ***********************************************************************
 
     likeMessage: function(req, res) {
         const headerAuth = req.headers['authorization']

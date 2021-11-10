@@ -4,7 +4,9 @@
     <div class="card" v-for="message in messages" :key="message.id">
       <router-link :to="{ name: 'OneMessage', params: { id: message.id } }">
         <h1 class="card__title">{{ message.title }}</h1>
-        <img :src="message.attachment" :alt="message.title" />
+        <div class="" v-if="message.attachment !== '0'">
+          <img :src="message.attachment" :alt="message-image" />
+        </div>
         <p class="card__subtitle">{{ message.content }}</p>
         <p class="card__title">
           Published by {{ message.firstName }} {{ message.lastName }}
