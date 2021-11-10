@@ -1,5 +1,5 @@
 // Imports
-const fs = require('fs')
+const fs = require('fs') // dealing with image
 const models = require('../models')
 const jwtUtils = require('../middleware/auth')
 
