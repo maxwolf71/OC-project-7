@@ -24,7 +24,7 @@ exports.router = (function () {
     apiRouter.route('/messages/:id/').delete(messagesCtrl.deleteMessage)
 
     // Likes routes
-    //apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likeMessage)
+    apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likeMessage)
 
     return apiRouter
 })() // instance of router
