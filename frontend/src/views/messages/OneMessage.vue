@@ -13,6 +13,8 @@
       </div>
       <div class="" v-else>
         <Like />
+        <CreateComment />
+        <Comments />
       </div>
     </div>
   </div>
@@ -21,11 +23,13 @@
 <script>
 import Nav from "@/components/Nav"
 import Like from "@/components/Like"
+import CreateComment from "@/components/CreateComment"
+import Comments from "@/components/Comments"
 import axios from "axios"
 
 export default {
   name: "OneMessage",
-  components: { Nav, Like },
+  components: { Nav, Like, CreateComment, Comments },
   data() {
     return {
       message: [],

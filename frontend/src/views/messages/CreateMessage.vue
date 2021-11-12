@@ -70,7 +70,7 @@ export default {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((res) => {
+        .then(res => {
           if (res) {
             this.$router.push("/feed")
           } //go to message feed

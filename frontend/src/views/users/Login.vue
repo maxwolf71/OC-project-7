@@ -18,7 +18,7 @@
             <input v-model="bio" class="form-row__input" type="Bio" placeholder="Enter a short bio (optional)">
         </div>
         <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
-            Email and/or password incorrect !
+            Wrong email and/or password !
         </div>
         <div class="form-row" v-if="mode == 'create' && status == 'error_create'">
             Email address already used !

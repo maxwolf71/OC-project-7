@@ -3,13 +3,14 @@ import { createRouter, createWebHistory } from "vue-router"
 // Users imports
 import Login from '../views/users/Login.vue'
 import Profile from '../views/users/Profile.vue'
-import NotFound from '../views/NotFound.vue'
 import Bio from '../views/users/Bio.vue'
 
 // Messages imports
 import Feed from '../views/messages/Feed.vue' // display all messages
 import CreateMessage from '../views/messages/CreateMessage.vue' // post a message
 import OneMessage from '../views/messages/OneMessage.vue' // show single message
+
+import NotFound from '../views/NotFound.vue'
 
 const routes = [
     {

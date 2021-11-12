@@ -12,25 +12,25 @@ export default {
   name: "Like",
   data() {
     return {
-      message: []
-    }
+      message: [],
+    };
   },
   mounted() {
-    const messageId = this.$route.params.id
+    const messageId = this.$route.params.id;
 
     axios
       .get(`http://localhost:3000/api/messages/${messageId}`)
       .then((response) => {
-        this.message = response.data
+        this.message = response.data;
       })
       .catch((err) => {
-        console.log(err.message)
-      })
+        console.log(err.message);
+      });
   },
   methods: {
     createLike() {
-      const messageId = this.$route.params.id
-      const token = this.$store.state.user.token
+      const messageId = this.$route.params.id;
+      const token = this.$store.state.user.token;
 
       axios
         .post(
@@ -45,20 +45,20 @@ export default {
         )
         .then((result) => {
           if (result.data.message == "Message liked !") {
-            alert("Message liked !")
-            window.location.reload()
+            alert("Message liked !");
+            window.location.reload();
           } else if (result.data.message == "I no longer like this message !") {
-            alert("Message no longer liked !")
-            window.location.reload()
+            alert("Message no longer liked !");
+            window.location.reload();
           }
         })
         .catch((error) => {
-          console.log(error)
-          alert("unable to like message !")
-        })
+          console.log(error);
+          alert("unable to like message !");
+        });
     },
   },
-}
+};
 </script>
 
 <style scoped>

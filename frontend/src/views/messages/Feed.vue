@@ -5,7 +5,7 @@
       <router-link :to="{ name: 'OneMessage', params: { id: message.id } }">
         <h1 class="card__title">{{ message.title }}</h1>
         <div class="" v-if="message.attachment !== '0'">
-          <img :src="message.attachment" :alt="message-image" />
+          <img :src="message.attachment" alt="message-image" />
         </div>
         <p class="card__subtitle">{{ message.content }}</p>
         <p class="card__title">
@@ -19,6 +19,7 @@
 
 <script>
 import Nav from "@/components/Nav"
+
 import axios from "axios"
 
 export default {

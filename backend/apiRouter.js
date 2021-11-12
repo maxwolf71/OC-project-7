@@ -28,7 +28,10 @@ exports.router = (function () {
     apiRouter.route('/messages/:messageId/vote/like').post(likesCtrl.likeMessage)
 
     // Comments routes
-    apiRouter.route('/messages/:messageId/comment').post(commentsCtrl.createComment)
+    apiRouter.route('/comments/:messageId/new/').post(commentsCtrl.createComment)
+    apiRouter.route('/comments/:id/').get(multer, commentsCtrl.oneComment)
+    apiRouter.route('/comments/:id/').delete(commentsCtrl.deleteComment)
+    //apiRouter.route('/comments/').get(commentsCtrl.listComments)
 
     return apiRouter
 })() // instance of router
