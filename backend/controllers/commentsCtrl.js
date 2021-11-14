@@ -35,20 +35,42 @@ module.exports = {
             })
             .catch(error => res.status(500).json({ error: 'Unable to find user !' }))
     },
-    oneComment(req, res) {
-        models.Comment.findOne({
-            where: { id: req.params.id }
+    listCommentsMessage(req, res) {
+        const headerAuth = req.headers['authorization']
+        const userId = jwtUtils.getUserId(headerAuth)
+
+        const fields = req.query.fields
+        const limit = parseInt(req.query.limit)
+        const offset = parseInt(req.query.offset)
+        const order = req.query.order
+
+        models.User.findOne({
+            where: { id: userId }
         })
-            .then(comment => {
-                if (comment) {
-                    res.status(201).json(comment)
-                } else {
-                    res.status(404).json({ 'error': 'message not found' })
-                }
+            .then(() => {
+                models.Message.findOne({
+                    where: { id: req.params.id }
+                })
+                    .then(messageFound => {
+                        models.Comment.findAll({
+                            order: [(order != null) ? order.split(':') : ['createdAt', 'DESC']],
+                            attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
+                            limit: (!isNaN(limit)) ? limit : null,
+                            offset: (!isNaN(offset)) ? offset : null,
+                            where: { messageId: messageFound.id }
+                        })
+                        .then(commentFound => {
+                            if (!commentFound.length == 0) {
+                                res.status(200).json(commentFound)
+                            } else {
+                                res.status(500).json({ error: 'No comments for this message !' })
+                            }
+                        })
+                        .catch(err => {res.status(500).json({ error: 'Unable to search for comment !' })})
+                    })
+                    .catch(error => res.status(500).json({ error: 'Unable to find message !' }))
             })
-            .catch(function (err) {
-                res.status(500).json({ 'error': 'cannot fetch message' })
-            })
+            .catch(error => res.status(500).json({ error: 'Unable to find user !' }))
     },
     deleteComment: async (req, res) => {
         const headerAuth = req.headers['authorization'];

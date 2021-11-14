@@ -106,8 +106,8 @@ module.exports = {
             })
     },
     deleteMessage: async (req, res) => {
-        const headerAuth = req.headers['authorization'];
-        const userId = jwtUtils.getUserId(headerAuth);
+        const headerAuth = req.headers['authorization']
+        const userId = jwtUtils.getUserId(headerAuth)
 
         const Messages = models.Message
         const attachment = Messages.attachment
@@ -120,7 +120,7 @@ module.exports = {
         .then(message => {
             if (message.UserId == userId || isAdmin === true) {
                 if (attachment !== null) {
-                    const filename = message.attachment.split('/images/')[1];
+                    const filename = message.attachment.split('/images/')[1]
                     fs.unlink(`images/${filename}`, () => {
                         Messages.destroy({ where: { id: req.params.id } })
                             .then(() => res.status(200).json({ message: 'Message and image deleted !' }))
