@@ -14,17 +14,19 @@
         </p>
       </router-link>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Nav from "@/components/Nav"
+import Footer from "@/components/Footer"
 
 import axios from "axios"
 
 export default {
   name: "Feed",
-  components: { Nav },
+  components: { Nav, Footer },
   data() {
     return {
       messages: [],
@@ -58,4 +60,31 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.card {
+  text-align: center;
+  max-width: 100%;
+  width: 540px;
+  background: #fd2d01;
+  border-radius: 16px;
+  padding: 10px;
+  border: 4px solid #fff;
+  margin: 50px auto;
+
+  &__title {
+    font-weight: 800;
+    color: #fff;
+  }
+  &__subtitle {
+    color: white;
+    font-weight: 500;
+    font-size: 30px;
+  }
+  &__action {
+    color: #fff;
+  }
+  &__action:hover {
+    cursor: pointer;
+  }
+}
+</style>

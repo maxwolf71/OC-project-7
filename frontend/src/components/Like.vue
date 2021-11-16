@@ -1,5 +1,5 @@
 <template>
-  <div class="like" v-if="message.userId !== this.$store.state.user.userId">
+  <div class="like">
     <fa icon="heart" @click="createLike" />
     <p>{{ message.likes }}</p>
   </div>
@@ -24,7 +24,7 @@ export default {
         this.message = response.data;
       })
       .catch((err) => {
-        console.log(err.message);
+        console.log(err.message)
       });
   },
   methods: {
@@ -43,27 +43,27 @@ export default {
             },
           }
         )
-        .then((result) => {
+        .then(result => {
           if (result.data.message == "Message liked !") {
-            alert("Message liked !");
-            window.location.reload();
+            alert("Message liked !")
           } else if (result.data.message == "I no longer like this message !") {
-            alert("Message no longer liked !");
-            window.location.reload();
+            alert("Message no longer liked !")
           }
         })
         .catch((error) => {
           console.log(error);
           alert("unable to like message !");
-        });
+        })
     },
   },
-};
+}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "src/assets/styles/main.scss";
+
 .like {
-  color: red;
+  color: $mainRed;
   font-size: 2rem;
   transform-style: 4s;
 }

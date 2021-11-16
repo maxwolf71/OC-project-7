@@ -78,3 +78,34 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+@import "src/assets/styles/main.scss";
+
+.card {
+  text-align: center;
+  max-width: 100%;
+  width: 540px;
+  background: $lightRed;
+  border-radius: 16px;
+  padding: 10px;
+  border: 4px solid #fff;
+  margin: 50px auto;
+
+  &__title {
+    font-weight: 800;
+    color: #fff;
+  }
+  &__subtitle {
+    color: white;
+    font-weight: 500;
+    font-size: 30px;
+  }
+  &__action {
+    color: #fff;
+  }
+  &__action:hover {
+    cursor: pointer;
+  }
+}
+</style>

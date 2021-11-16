@@ -7,12 +7,15 @@
 <script>
 
 export default {
-  name: "App"
+  name: "App",
 }
 </script>
 
-<style>
+<style lang="scss" >
+
+@import "assets/styles/main";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;800&display=swap");
+
 * {
   font-family: "Poppins", sans-serif;
   margin: 0;
@@ -23,50 +26,18 @@ export default {
   max-width: 100%;
 }
 body {
-  background-color: #532380;
-  min-height: 100vh;
+  background-image: url(assets/logos/icon.png);
+  background-repeat: no-repeat;
+  background-position: center 5%;
   padding: 32px;
-}
-img {
-  max-width: 30%;
-  border-radius: 8px;
-}
-.card {
-  max-width: 100%;
-  width: 540px;
-  background: #ce9f9f;
-  border-radius: 16px;
-  padding: 10px;
-  border: 2px solid red;
-  margin: 10px auto;
-}
-.card__title {
-  font-weight: 800;
-  color: #532380;
-}
-.card__subtitle {
-  color: white;
-  font-weight: 500;
-  font-size: 30px;
-}
-.card__action {
-  color: #2196f3;
-}
-.card__action:hover {
-  cursor: pointer;
+  a {
+    text-decoration: none;
+  }
 }
 
-.bio {
-  font-weight: bold;
-  padding: 50px 0;
-  border: 2px solid whitesmoke;
-  margin: 20px 0 150px;
-  color: white;
-  border-radius: 16px;
-}
 .button {
-  background: #bb4c55;
-  color: #fff;
+  background: $white;
+  color: $mainRed;
   border-radius: 8px;
   font-weight: 800;
   font-size: 15px;
@@ -74,35 +45,20 @@ img {
   width: 100%;
   padding: 16px;
   transition: 0.4s background-color;
-  margin-bottom: 15px;
+  margin: 15px 0;
+
+  &.button:hover {
+    cursor: pointer;
+    background: $lightRed;
+  }
+  &.button--disabled {
+    background: $white;
+    color: $mainRed;
+  }
+  &.button--disabled:hover {
+    cursor: not-allowed;
+    background: $lightRed;
+  }
 }
-.button:hover {
-  cursor: pointer;
-  background: #1976d2;
-}
-.button--disabled {
-  background: #cecece;
-  color: #ececec;
-}
-.button--disabled:hover {
-  cursor: not-allowed;
-  background: #cecece;
-}
-h1 {
-  color: white;
-  font-size: 35px;
-  padding: 20px;
-}
-h3 {
-  color: white;
-}
-nav, a {
-  text-align: center;
-  text-decoration: none;
-  color: #999;
-}
-.router-link-active {
-  font-weight: bold;
-  color: whitesmoke;
-}
+
 </style>

@@ -171,11 +171,10 @@ module.exports = {
         }
     })
     .catch(error => res.status(500).json({ message: "User not found" })) 
-  }
+  },
 
-  /*
   // UPDATE USER PROFILE ***********************************************************************
-  updateUserBio: function (req, res) {
+/*  updateUserBio: function (req, res) {
     const headerAuth = req.headers['authorization']
     const userId = jwtUtils.getUserId(headerAuth)
 

@@ -16,16 +16,20 @@
         <button @click="logout" class="button">Delete account (Admin only !)</button>
       </div>
     </div>
+    <div class="footer">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex"
 import Nav from "@/components/Nav"
+import Footer from "@/components/Footer"
 
 export default {
   name: "Profile",
-  components: { Nav },
+  components: { Nav, Footer },
   mounted() {
     if (this.$store.state.user.userId == -1) {
       //if user doesn't exist
@@ -47,4 +51,42 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+
+.card {
+  text-align: center;
+  max-width: 100%;
+  width: 540px;
+  background: #fd2d01;
+  border-radius: 16px;
+  padding: 10px;
+  border: 4px solid #fff;
+  margin: 50px auto;
+
+  &__title {
+    font-weight: 800;
+    color: #fff;
+  }
+  &__subtitle {
+    color: white;
+    font-weight: 500;
+    font-size: 30px;
+  }
+  &__action {
+    color: #fff;
+  }
+  &__action:hover {
+    cursor: pointer;
+  }
+  .bio {
+  font-weight: bold;
+  padding: 20px 0;
+  border: 2px solid whitesmoke;
+  margin: 20px;
+  color: white;
+  border-radius: 16px;
+}
+}
+</style>
       

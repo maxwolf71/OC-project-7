@@ -1,9 +1,9 @@
 <template>
-  <div class="createPost">
+  <div class="editBio">
     <Nav title="Edit Bio" />
-    <div class="newPost">
+    <div class="newBio">
       <form class="formCreate" @submit.prevent="editBio">
-        <div class="formNewPost">
+        <div class="formNewBio">
           <label for="bio"></label>
           <textarea
             name="bio"
@@ -34,11 +34,14 @@ export default {
   },
   methods: {
     editBio() {
+      const formCreate = document.getElementsByClassName("formCreate")[0]
+      let data = new FormData(formCreate)
+
       const userId = this.$store.state.user.userId
       const token = this.$store.state.user.token
 
       axios
-        .put(`http://localhost:3000/api/users/bio/${userId}`, {
+        .put(`http://localhost:3000/api/users/bio/${userId}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -49,8 +52,8 @@ export default {
             alert("You're bio has been updated")
           }
         })
-        .catch((error) => {
-          console.log(error.message)
+        .catch(error => {
+          console.log(error)
         })
     },
   },
