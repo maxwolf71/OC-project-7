@@ -2,12 +2,12 @@
   <div>
     <Nav title="Message view" />
     <div class="card">
-      <h3>{{ message.title }}</h3>
-      <h3>by {{ message.firstName }} {{ message.lastName }}</h3>
+      <h3 class="card__title">{{ message.title }}</h3>
+      <h3 class="card__title">by {{ message.firstName }} {{ message.lastName }}</h3>
       <div v-if="message.attachment !== '0'">
         <img :src="message.attachment" alt="message-image" />
       </div>
-      <h3>{{ message.content }}</h3>
+      <h3 class="card__subtitle">{{ message.content }}</h3>
       <div v-if="message.userId == this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
         <button @click="deleteMessage" class="button">Delete</button>
       </div>
@@ -86,7 +86,7 @@ export default {
   text-align: center;
   max-width: 100%;
   width: 540px;
-  background: $lightRed;
+  background: $mainRed;
   border-radius: 16px;
   padding: 10px;
   border: 4px solid #fff;
@@ -106,6 +106,9 @@ export default {
   }
   &__action:hover {
     cursor: pointer;
+  }
+  img {
+    width: 50%; 
   }
 }
 </style>

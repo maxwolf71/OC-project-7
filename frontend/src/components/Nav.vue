@@ -1,10 +1,13 @@
 <template>
-  <nav class="navBar">
-    <h1 class="navBar__links">{{ title }}</h1>
-    <router-link :to="{ name: 'Profile' }">Profile</router-link> |
-    <router-link :to="{ name: 'Feed' }">Message feed</router-link> |
-    <router-link :to="{ name: 'CreateMessage' }">Post a message</router-link>
+  <div>
+    <nav class="navBar">
+    <img src="../assets/logos/icon-above-font.png" alt="logo">
+    <router-link :to="{ name: 'Profile' }"><fa icon="user" /></router-link>
+    <router-link :to="{ name: 'Feed' }"><fa icon="rss" /></router-link>
+    <router-link :to="{ name: 'CreateMessage' }"><fa icon="comment-alt" /></router-link>
   </nav>
+  </div>
+  
 </template>
 
 <script>
@@ -18,20 +21,26 @@ export default {
 @import "src/assets/styles/main.scss";
 
 .navBar {
-  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   background-color: $mainRed;
-  color: $white;
-  text-align: center;
+  margin-bottom: 100px;
+  img {
+    height: 50px;
+  }
   &__links, a {
     color: $white;
+    font-size: 40px;
   }
   a.router-link-active {
     font-weight: bold;
-    color: $extraColor;
+    color: $blue;
   }
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Nav title="My Profile" />
     <div class="card">
       <h1 class="card__title">{{ user.firstName }} {{ user.lastName }}</h1>
       <h3 class="card__subtitle">Bio :</h3>
@@ -16,20 +15,14 @@
         <button @click="logout" class="button">Delete account (Admin only !)</button>
       </div>
     </div>
-    <div class="footer">
-      <Footer />
-    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex"
-import Nav from "@/components/Nav"
-import Footer from "@/components/Footer"
 
 export default {
   name: "Profile",
-  components: { Nav, Footer },
   mounted() {
     if (this.$store.state.user.userId == -1) {
       //if user doesn't exist
@@ -53,16 +46,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "src/assets/styles/main.scss";
 
 .card {
   text-align: center;
   max-width: 100%;
   width: 540px;
-  background: #fd2d01;
+  background: $mainRed;
   border-radius: 16px;
   padding: 10px;
   border: 4px solid #fff;
-  margin: 50px auto;
+  margin: 250px auto;
 
   &__title {
     font-weight: 800;

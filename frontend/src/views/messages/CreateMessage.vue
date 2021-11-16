@@ -1,6 +1,5 @@
 <template>
   <div class="createPost">
-    <Nav title="Post a message" />
     <div class="card">
       <h2 class="card__title">Enter your text here :</h2>
       <div class="card">
@@ -35,13 +34,10 @@
         </form>
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script>
-import Nav from "@/components/Nav"; 
-import Footer from "@/components/Footer";
 
 import axios from "axios";
 
@@ -60,7 +56,6 @@ export default {
       return;
     }
   },
-  components: { Nav, Footer },
   methods: {
     createMessage() {
       const formCreate = document.getElementsByClassName("formCreate")[0];

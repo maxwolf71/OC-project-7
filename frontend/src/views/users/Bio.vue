@@ -1,6 +1,5 @@
 <template>
   <div class="editBio">
-    <Nav title="Edit Bio" />
     <div class="newBio">
       <form class="formCreate" @submit.prevent="editBio">
         <div class="formNewBio">
@@ -21,12 +20,11 @@
 </template>
 
 <script>
-import Nav from "@/components/Nav"
+
 import axios from "axios"
 
 export default {
   name: "Bio",
-  components: { Nav },
   data() {
     return {
       bio: "",

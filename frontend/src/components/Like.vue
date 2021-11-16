@@ -1,7 +1,7 @@
 <template>
   <div class="like">
-    <fa icon="heart" @click="createLike" />
-    <p>{{ message.likes }}</p>
+    <fa icon="heart" @click="createLike" class="notLiked" />
+    <p>{{ likes }}</p>
   </div>
 </template>
 
@@ -12,20 +12,20 @@ export default {
   name: "Like",
   data() {
     return {
-      message: [],
-    };
+      likes: [],
+    }
   },
   mounted() {
     const messageId = this.$route.params.id;
 
     axios
       .get(`http://localhost:3000/api/messages/${messageId}`)
-      .then((response) => {
-        this.message = response.data;
+      .then(response => {
+        this.likes = response.data.likes
       })
-      .catch((err) => {
-        console.log(err.message)
-      });
+      .catch(err => {
+        console.log(err)
+      })
   },
   methods: {
     createLike() {
@@ -45,9 +45,13 @@ export default {
         )
         .then(result => {
           if (result.data.message == "Message liked !") {
-            alert("Message liked !")
+            this.likes++
+            document.querySelector('.notLiked').classList.add('liked')
+            document.querySelector('.liked').classList.remove('notLiked')
           } else if (result.data.message == "I no longer like this message !") {
-            alert("Message no longer liked !")
+            this.likes--
+            document.querySelector('.liked').classList.add('notLiked')
+            document.querySelector('.liked').classList.remove('liked')
           }
         })
         .catch((error) => {
@@ -63,13 +67,24 @@ export default {
 @import "src/assets/styles/main.scss";
 
 .like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: $mainRed;
+  background-color: $white;
+  border-radius: 30px;
   font-size: 2rem;
   transform-style: 4s;
-}
-.unlike {
-  color: green;
-  font-size: 2rem;
-  transform-style: 4s;
+  & .notLiked {
+    color: $lightRed;
+    transition: .4s;
+  }
+  & .liked {
+    color: $mainRed;
+    transition: .4s;
+  }
+  p {
+    margin-left: 15px;
+  }
 }
 </style>

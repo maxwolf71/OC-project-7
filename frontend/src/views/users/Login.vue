@@ -188,11 +188,10 @@ export default {
     font-size: 30px;
   }
   &__action {
-    color: #fff;
+    color: $blue;
   }
   &__action:hover {
     cursor: pointer;
   }
-} 
-
+}
 </style>
