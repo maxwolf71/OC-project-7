@@ -172,7 +172,7 @@ export default {
   text-align: center;
   max-width: 100%;
   width: 540px;
-  background: #fd2d01;
+  background: $mainRed;
   border-radius: 16px;
   padding: 10px;
   border: 4px solid #fff;

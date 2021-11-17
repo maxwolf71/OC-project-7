@@ -1,18 +1,16 @@
 <template>
   <nav>
-    <Nav />
     <Footer />
     <router-view />
   </nav>
 </template>
 
 <script>
-import Nav from "@/components/Nav"
 import Footer from "@/components/Footer"
 
 export default {
   name: "App",
-  components: { Nav, Footer }
+  components: { Footer }
 }
 </script>
 

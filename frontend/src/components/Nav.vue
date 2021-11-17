@@ -1,11 +1,10 @@
 <template>
   <div>
     <nav class="navBar">
-    <img src="../assets/logos/icon-above-font.png" alt="logo">
-    <router-link :to="{ name: 'Profile' }"><fa icon="user" /></router-link>
-    <router-link :to="{ name: 'Feed' }"><fa icon="rss" /></router-link>
-    <router-link :to="{ name: 'CreateMessage' }"><fa icon="comment-alt" /></router-link>
-  </nav>
+      <router-link :to="{ name: 'Profile' }"><fa icon="user" /></router-link>
+      <router-link :to="{ name: 'Feed' }"><fa icon="rss" /></router-link>
+      <router-link :to="{ name: 'CreateMessage' }"><fa icon="comment-alt" /></router-link>
+    </nav>
   </div>
   
 </template>
@@ -32,7 +31,7 @@ export default {
   background-color: $mainRed;
   margin-bottom: 100px;
   img {
-    height: 50px;
+    height: 60px;
   }
   &__links, a {
     color: $white;

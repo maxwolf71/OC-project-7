@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav title="Message view" />
+    <Nav />
     <div class="card">
       <h3 class="card__title">{{ message.title }}</h3>
       <h3 class="card__title">by {{ message.firstName }} {{ message.lastName }}</h3>

@@ -1,28 +1,31 @@
 <template>
   <div>
+    <Nav />
+    <div class="main">
     <div class="card" v-for="message in messages" :key="message.id">
       <router-link :to="{ name: 'OneMessage', params: { id: message.id } }">
         <h1 class="card__title">{{ message.title }}</h1>
         <div class="" v-if="message.attachment !== '0'">
           <img :src="message.attachment" alt="message-image" />
         </div>
-        <p class="card__subtitle">{{ message.content }}</p>
-        <p class="card__title">
+        <p class="card__content">{{ message.content }}</p>
+        <p class="card__datePublish">
           Published by {{ message.firstName }} {{ message.lastName }}
           on {{ dateOfMessage(message.createdAt) }}
         </p>
       </router-link>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
-
-
 import axios from "axios"
+import Nav from "@/components/Nav"
 
 export default {
   name: "Feed",
+  components: { Nav },
   data() {
     return {
       messages: [],
@@ -58,28 +61,41 @@ export default {
 
 <style lang="scss" scoped>
 @import "src/assets/styles/main.scss";
-.card {
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 50px;
+
+  .card {
   text-align: center;
-  max-width: 100%;
-  width: 540px;
+  width: 450px;
   background: $mainRed;
   border-radius: 16px;
-  padding: 10px;
-  margin: 70px auto;
+  padding: 5px;
 
   &__title {
-    font-weight: 800;
-    color: $white;
-  }
-  &__subtitle {
     color: $white;
     font-size: 30px;
   }
-  &__action:hover {
-    cursor: pointer;
+  &__content {
+    color: $white;
+    font-size: 20px;
+    border: 2px solid $lightRed;
+    border-radius: 30px;
+    padding: 5px;
+    margin: 15px;
+  }
+  &__datePublish {
+    color: $white;
+    font-size: 15px;
+    font-style: italic;
   }
   img {
-    width: 50%; 
+    width: 40%; 
   }
+}
 }
 </style>

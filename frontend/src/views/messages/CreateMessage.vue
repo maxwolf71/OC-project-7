@@ -1,7 +1,8 @@
 <template>
-  <div class="createPost">
+  <div>
+    <Nav />
     <div class="card">
-      <h2 class="card__title">Enter your text here :</h2>
+      <h2 class="card__title">Create your message :</h2>
       <div class="card">
         <form class="formCreate" @submit.prevent="createMessage">
           <div class="card__title">
@@ -14,7 +15,7 @@
             /><br />
           </div>
 
-          <div class="card__title">
+          <div class="card__message">
             <label for="content">Message: </label><br />
             <textarea
               name="content"
@@ -25,8 +26,8 @@
             <br />
           </div>
           <div class="card">
-            <label class="card__title" for="attachment"
-              >Select Image: <br />
+            <label class="card__image" for="attachment"
+              >Select Image : 
               <input class="attachment" type="file" name="attachment" /> <br />
             </label>
           </div>
@@ -40,9 +41,11 @@
 <script>
 
 import axios from "axios";
+import Nav from "@/components/Nav"
 
 export default {
   name: "Message",
+  components: { Nav },
   data() {
     return {
       title: "",
@@ -83,39 +86,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "src/assets/styles/main.scss";
 
 .card {
   text-align: center;
   max-width: 100%;
   width: 540px;
-  background: #fd2d01;
+  background: $mainRed;
   border-radius: 16px;
   padding: 10px;
-  border: 4px solid #fff;
+  border: 4px solid $white;
   margin: 50px auto;
 
   &__title {
-    font-weight: 800;
-    color: #fff;
+    color: $white;
+    font-size: 25px;
   }
-  &__subtitle {
-    color: white;
-    font-weight: 500;
-    font-size: 30px;
+  &__message {
+    color: $white;
+    font-size: 20px;
+  }
+  &__image {
+    color: $white;
   }
   &__action {
-    color: #fff;
+    color: $white;
   }
   &__action:hover {
     cursor: pointer;
   }
-  .bio {
-  font-weight: bold;
-  padding: 20px 0;
-  border: 2px solid whitesmoke;
-  margin: 20px;
-  color: white;
-  border-radius: 16px;
-}
 }
 </style>

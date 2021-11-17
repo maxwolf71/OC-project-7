@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Nav />
     <div class="card">
       <h1 class="card__title">{{ user.firstName }} {{ user.lastName }}</h1>
       <h3 class="card__subtitle">Bio :</h3>
@@ -8,11 +9,11 @@
         <p class="bio">{{ user.bio }}</p>
       <!--</router-link>-->
 
-      <div class="form_row">
+      <div>
         <button @click="logout" class="button">Sign out</button>
       </div>
-      <div class="form_row" v-if="user.id !== this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
-        <button @click="logout" class="button">Delete account (Admin only !)</button>
+      <div v-if="user.id !== this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
+        <button @click="logout" class="delAccount">Delete account (Not reversable !)</button>
       </div>
     </div>
   </div>
@@ -20,9 +21,11 @@
 
 <script>
 import { mapState } from "vuex"
+import Nav from "@/components/Nav"
 
 export default {
   name: "Profile",
+  components: { Nav },
   mounted() {
     if (this.$store.state.user.userId == -1) {
       //if user doesn't exist
@@ -73,6 +76,9 @@ export default {
   &__action:hover {
     cursor: pointer;
   }
+  & .delAccount {
+    color: red;
+  }
   .bio {
   font-weight: bold;
   padding: 20px 0;
@@ -80,7 +86,7 @@ export default {
   margin: 20px;
   color: white;
   border-radius: 16px;
-}
+  }
 }
 </style>
       
