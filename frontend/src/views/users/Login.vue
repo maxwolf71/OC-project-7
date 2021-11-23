@@ -1,77 +1,53 @@
 <template>
   <div class="card">
+
     <h1 class="card__title" v-if="mode == 'login'">Sign in</h1>
     <h1 class="card__title" v-else>Sign up</h1>
+
     <p class="card__subtitle" v-if="mode == 'login'">
       Don't have an account yet ?
-      <span class="card__action" @click="switchToCreateAccount()"
-        >Create one</span
-      >
+      <span class="card__action" @click="switchToCreateAccount()">Create one</span>
     </p>
+
     <p class="card__subtitle" v-else>
-      Already have an account ?
+      Already have an account ?<br>
       <span class="card__action" @click="switchToLogin()">Sign in</span>
     </p>
-    <div class="form-row">
-      <input
-        v-model="email"
-        class="form-row__input"
-        type="text"
-        placeholder="Email Address"
-      />
+
+    <div>
+      <input v-model="email" class="card__input" type="text" placeholder="Email Address"/>
     </div>
-    <div class="form-row" v-if="mode == 'create'">
-      <input
-        v-model="firstName"
-        class="form-row__input"
-        type="text"
-        placeholder="First name"
-      />
-      <input
-        v-model="lastName"
-        class="form-row__input"
-        type="text"
-        placeholder="Last name"
-      />
+
+    <div v-if="mode == 'create'">
+      <input v-model="firstName" class="card__input" type="text" placeholder="First name"/><br>
+      <input v-model="lastName" class="card__input" type="text" placeholder="Last name"/>
     </div>
-    <div class="form_row">
-      <input
-        v-model="password"
-        class="form-row__input"
-        type="password"
-        placeholder="Password"
-      />
+
+    <div>
+      <input v-model="password" class="card__input" type="password" placeholder="Password"/>
     </div>
-    <div class="form-row" v-if="mode == 'create'">
-      <input
-        v-model="bio"
-        class="form-row__input"
-        type="Bio"
-        placeholder="Enter a short bio (optional)"
-      />
+    
+    <div v-if="mode == 'create'">
+      <input v-model="bio" class="card__input" type="Bio" placeholder="Enter a short bio (optional)"/>
     </div>
-    <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
+
+    <div v-if="mode == 'login' && status == 'error_login'">
       Wrong email and/or password !
     </div>
-    <div class="form-row" v-if="mode == 'create' && status == 'error_create'">
+
+    <div v-if="mode == 'create' && status == 'error_create'">
       Email address already used !
     </div>
-    <div class="form-row">
-      <button
-        @click="login()"
-        class="button"
-        :class="{ 'button--disabled': !validatedFields }"
-        v-if="mode == 'login'"
-      >
+
+    <div>
+      <button @click="login()" class="button" :class="{ 'button--disabled': !validatedFields }" 
+      v-if="mode == 'login'">
         <span v-if="status == 'loading'">Connecting...</span>
         <span v-else>Sign in</span>
       </button>
-      <button
-        @click="createAccount()"
-        class="button"
-        :class="{ 'button--disabled': !validatedFields }"
-        v-else
-      >
+
+      <button @click="createAccount()" class="button" :class="{ 'button--disabled': !validatedFields }" 
+      v-else>
         <span v-if="status == 'loading'">Creating account...</span>
         <span v-else>Create account</span>
       </button>
@@ -170,28 +146,31 @@ export default {
 
 .card {
   text-align: center;
-  max-width: 100%;
-  width: 540px;
+  width: 550px;
   background: $mainRed;
   border-radius: 16px;
   padding: 10px;
-  border: 4px solid #fff;
+  border: 4px solid $lightRed;
   margin: 50px auto;
 
   &__title {
-    font-weight: 800;
     color: $white;
   }
   &__subtitle {
-    color: white;
-    font-weight: 500;
+    color: $white;
     font-size: 30px;
   }
   &__action {
-    color: $blue;
+    background-color: $lightRed;
+    color: $mainRed;
+    border-radius: 15px;
+    padding: 0 5px;
   }
   &__action:hover {
     cursor: pointer;
+  }
+  &__input {
+    margin-top: 10px;
   }
 }
 </style>

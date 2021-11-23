@@ -2,7 +2,7 @@
   <div>
     <Nav />
     <div class="card">
-      <h3 class="card__title">{{ message.title }}</h3>
+      <h3 class="card__subtitle">{{ message.title }}</h3>
       <h3 class="card__title">by {{ message.firstName }} {{ message.lastName }}</h3>
       <div v-if="message.attachment !== '0'">
         <img :src="message.attachment" alt="message-image" />
