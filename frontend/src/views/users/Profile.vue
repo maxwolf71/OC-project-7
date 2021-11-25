@@ -55,11 +55,11 @@ export default {
   text-align: center;
   max-width: 100%;
   width: 540px;
-  background: $mainRed;
+  background: $blue;
   border-radius: 16px;
   padding: 10px;
   border: 4px solid #fff;
-  margin: 250px auto;
+  margin: 200px auto;
 
   &__title {
     font-weight: 800;

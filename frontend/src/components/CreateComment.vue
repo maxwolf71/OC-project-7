@@ -3,12 +3,9 @@
     <h2>Add a comment</h2>
     <div class="NewComment">
       <label for="content"></label>
-      <textarea
-        name="content"
-        class="contentNewComment"
-        placeholder="Text content here"
-        v-model="content"
-      ></textarea>
+      <textarea 
+        name="content" class="contentNewComment"  placeholder="Text content here" v-model="content">
+      </textarea>
     </div>
     <div class="">
       <button type="submit" class="button" @click="createComment">
@@ -25,8 +22,8 @@ export default {
   name: "CreateComment",
   data() {
     return {
-      content: "",
-    };
+      content: '',
+    }
   },
   methods: {
     createComment() {
@@ -46,13 +43,14 @@ export default {
               },
             }
           )
-          .then((response) => {
-            this.comment = response.data;
-            window.location.reload();
+          .then(response => {
+            this.comment = response.data
+            alert("You're comment has been added !")
+            this.$router.push("/feed")
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch(err => {
+            console.log(err)
+          })
       }
     },
   },
@@ -64,9 +62,18 @@ export default {
 
 .createComment {
   color: $lightRed;
+  text-align: center;
+  max-width: 100%;
+  width: 540px;
+  background: $mainRed;
+  border-radius: 16px;
+  padding: 10px;
+  border: 4px solid $lightRed;
+  margin: 0 auto 100px;
 
   .button {
-    width: 40%;
+    width: 30%;
+    padding: 10px;
   }
 }
 </style>

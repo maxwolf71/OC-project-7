@@ -13,7 +13,7 @@
 export default {
   name: "Nav",
   props: { title: String },
-};
+}
 </script>
 
 <style lang="scss" scoped>

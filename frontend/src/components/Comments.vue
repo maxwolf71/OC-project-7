@@ -1,8 +1,8 @@
 <template>
-  <div class="card">
-    <div v-for="comment in comments" :key="comment.id">
-      <h1 class="card__subtitle">{{ comment.content }}</h1>
-      <p class="card__title">
+  <div>
+    <div class="commentCard" v-for="comment in comments" :key="comment.id">
+      <h1 class="commentCard__subtitle">{{ comment.content }}</h1>
+      <p class="commentCard__title" v-if="comment.id != null">
         Published by {{ comment.firstName }} {{ comment.lastName }} on
         {{ dateOfComment(comment.createdAt) }}
       </p>
@@ -22,7 +22,7 @@ export default {
     return {
       comments: [],
       userId: this.$store.state.user.userId,
-    };
+    }
   },
   mounted() {
     this.displayComments();
@@ -35,16 +35,19 @@ export default {
       axios
         .get(`http://localhost:3000/api/${messageId}/allcomments/`, {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((comments) => {
-          this.comments = comments.data;
+        .then(comments => {
+          this.comments = comments.data
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch(error => {
+          if(error.response.status == 404) {
+            this.comments = [{content: 'No comments for this message'}]
+          } else {
+            console.log('other error');
+          }
+        })
     },
     dateOfComment(date) {
       const event = new Date(date);
@@ -72,8 +75,8 @@ export default {
         .then((res) => {
           if (res) {
             console.log(res);
-            alert("Your comment has been deleted");
-            window.location.reload();
+            alert("Your comment has been deleted")
+            this.$router.push("/feed")
           }
         })
         .catch((error) => {
@@ -88,16 +91,24 @@ export default {
 <style lang="scss" scoped>
 @import "src/assets/styles/main.scss";
 
-.card {
+.commentCard {
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 2px solid $white;
-  border-radius: 30px;
+  border-radius: 20px;
   color: $white;
-  
+  padding: 10px;
+  width: 540px;
+  background-color: $blue;
+  border-radius: 20px;
+  margin: 10px auto 10px;
+
   & .button {
-    width: 35%;
+    text-align: center;
+    width: 20%;
+    padding: 5px;
+    margin: 5px auto;
   }
 }
 </style>

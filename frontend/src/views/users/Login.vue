@@ -65,7 +65,7 @@ export default {
       mode: "login",
       email: "",
       password: "",
-    };
+    }
   },
   mounted() {
     if (this.$store.state.user.userId != -1) {
@@ -118,7 +118,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-        });
+        })
     },
     createAccount() {
       const self = this;
@@ -135,7 +135,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-        });
+        })
     },
   },
 };
@@ -147,7 +147,7 @@ export default {
 .card {
   text-align: center;
   width: 550px;
-  background: $mainRed;
+  background: $blue;
   border-radius: 16px;
   padding: 10px;
   border: 4px solid $lightRed;
@@ -162,7 +162,7 @@ export default {
   }
   &__action {
     background-color: $lightRed;
-    color: $mainRed;
+    color: $blue;
     border-radius: 15px;
     padding: 0 5px;
   }

@@ -67,12 +67,12 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin-top: 50px;
+  margin-top: 80px;
 
   .card {
   text-align: center;
   width: 450px;
-  background: $mainRed;
+  background: $blue;
   border-radius: 16px;
   padding: 5px;
 

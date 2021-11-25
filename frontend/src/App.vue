@@ -31,8 +31,8 @@ export default {
 body {
   background-image: url(assets/logos/icon.png);
   background-repeat: no-repeat;
-  background-position: center 5%;
-  padding: 32px;
+  background-position: center 20%;
+
   a {
     text-decoration: none;
   }
