@@ -1,9 +1,8 @@
 <template>
   <div>
-    <Nav />
-    <div class="card">
-      <h2 class="card__title">Create your message :</h2>
+    <Nav />  
       <div class="card">
+        <h2 class="card__title">Create your message :</h2>
         <form class="formCreate" @submit.prevent="createMessage">
           <div class="card__title">
             <label for="title">Title: </label><br />
@@ -34,7 +33,6 @@
           <button class="button" type="submit">Post message</button>
         </form>
       </div>
-    </div>
   </div>
 </template>
 
@@ -50,7 +48,7 @@ export default {
     return {
       title: "",
       content: "",
-    };
+    }
   },
   mounted() {
     if (this.$store.state.user.userId == -1) {
@@ -72,14 +70,14 @@ export default {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((res) => {
+        .then(res => {
           if (res) {
-            this.$router.push("/feed");
-          } //go to message feed
+            this.$router.push("/feed") //go to message feed
+          } 
         })
-        .catch((error) => {
-          console.log(error.message);
-        });
+        .catch(error => {
+          console.log(error.message)
+        })
     },
   },
 };
@@ -92,11 +90,11 @@ export default {
   text-align: center;
   max-width: 100%;
   width: 540px;
-  background: $mainRed;
+  background: $blue;
   border-radius: 16px;
   padding: 10px;
   border: 4px solid $white;
-  margin: 50px auto;
+  margin: 80px auto;
 
   &__title {
     color: $white;

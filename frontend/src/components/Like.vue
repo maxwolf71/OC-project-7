@@ -75,6 +75,9 @@ export default {
   border-radius: 30px;
   font-size: 2rem;
   transform-style: 4s;
+  width: 20%;
+  margin: 10px auto;
+  
   & .notLiked {
     color: $lightRed;
     transition: .4s;
@@ -84,7 +87,7 @@ export default {
     transition: .4s;
   }
   p {
-    margin-left: 15px;
+    padding-left: 15px;
   }
 }
 </style>

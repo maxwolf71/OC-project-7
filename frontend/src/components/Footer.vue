@@ -16,7 +16,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: $mainRed;
+  background-color: $blue;
   text-align: center;
 
   & .contact, a {
