@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="commentCard" v-for="comment in comments" :key="comment.id">
-      <h1 class="commentCard__subtitle">{{ comment.content }}</h1>
+      <h1 class="commentCard__content">{{ comment.content }}</h1>
       <p class="commentCard__title" v-if="comment.id != null">
         Published by {{ comment.firstName }} {{ comment.lastName }} on
         {{ dateOfComment(comment.createdAt) }}
       </p>
-      <div class="button" v-if="comment.userId == userId"  @click="deleteComment(comment.id)">
-        Delete
+      <div class="button" v-if="comment.userId == userId" @click="deleteComment(comment.id)">
+        Delete comment
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@ export default {
     }
   },
   mounted() {
-    this.displayComments();
+    this.displayComments()
   },
   methods: {
     displayComments() {
@@ -42,10 +42,10 @@ export default {
           this.comments = comments.data
         })
         .catch(error => {
-          if(error.response.status == 404) {
+          if(this.comments == '') {
             this.comments = [{content: 'No comments for this message'}]
           } else {
-            console.log('other error');
+            console.log('other error')
           }
         })
     },
@@ -57,7 +57,7 @@ export default {
         day: "numeric",
         hour: "numeric",
         minute: "numeric",
-      };
+      }
 
       return event.toLocaleDateString("en-En", options);
     },
@@ -72,24 +72,23 @@ export default {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((res) => {
+        .then(res => {
           if (res) {
-            console.log(res);
-            alert("Your comment has been deleted")
-            this.$router.push("/feed")
+            alert('The comment has been deleted !')
+            location.reload()
           }
         })
         .catch((error) => {
           console.log(error);
-          alert("You can't delete comments other than your own !");
-        });
+          alert("You can't delete other users messages !");
+        })
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/main.scss";
+@import "src/assets/styles/_variables.scss";
 
 .commentCard {
   display: flex;
@@ -100,13 +99,19 @@ export default {
   color: $white;
   padding: 10px;
   width: 540px;
-  background-color: $blue;
+  background-color: $mainRed;
   border-radius: 20px;
   margin: 10px auto 10px;
 
+  &__content {
+    border: 2px solid $white;
+    border-radius: 20px;
+    padding: 15px;
+  }
+
   & .button {
     text-align: center;
-    width: 20%;
+    width: 30%;
     padding: 5px;
     margin: 5px auto;
   }

@@ -1,35 +1,25 @@
 <template>
-  <footer class="footer">
-    <img src="../assets/logos/icon-above-font.png" alt="logo">
-    <p class="contact">Contact : <a href="#">Groupomania@example.com</a></p>
-    
+  <footer>
+    <img src="../assets/logos/icon-left-font-monochrome-white-cropped.png" alt="logo">
   </footer>
 </template> 
 
 <style lang="scss" scoped>
+@import "src/assets/styles/_variables.scss";
 
-@import "src/assets/styles/main.scss";
-
-.footer {
-  padding: 15px;
-  position: fixed;
-  left: 0;
-  bottom: 0;
+footer {
   width: 100%;
-  background-color: $blue;
-  text-align: center;
+  background-color: $mainRed;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
 
-  & .contact, a {
-    color: $white;
-    display: flex;
-    flex-direction: column;
-  }
   img {
-    height: 70px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    margin: 0 0 5px 10px;
+    height: 50px;
+    margin: 15px;
   }
 }
+
 </style>

@@ -2,8 +2,8 @@
   <div>
     <Nav />
       <div class="messageCard">
-        <h3 class="messageCard__subtitle">{{ message.title }}</h3>
-        <p class="messageCard__title">
+        <h3 class="messageCard__title">{{ message.title }}</h3>
+        <p class="messageCard__subtitle">
           posted by {{ message.firstName }} {{ message.lastName }}
         </p>
         <div v-if="message.attachment !== '0'">
@@ -11,13 +11,12 @@
         </div>
         <h3 class="messageCard__content">{{ message.content }}</h3>
         <Like />
+        <div v-if="message.userId == this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
+          <button @click="deleteMessage" class="button">Delete message</button>
+        </div>
       </div>
       <Comments />
-      <CreateComment />
-      <div v-if="message.userId == this.$store.state.user.userId ||
-        this.$store.state.user.isAdmin == true">
-        <button @click="deleteMessage" class="button">Delete</button>
-      </div>   
+      <CreateComment @newComment="passNewCommentToCommentsList"/>   
   </div>
 </template>
 
@@ -34,7 +33,8 @@ export default {
   data() {
     return {
       message: [],
-    };
+      comments: []
+    }
   },
   mounted() {
     this.getOneMessage()
@@ -51,8 +51,15 @@ export default {
         })
         .catch((err) => {
           console.log(err.message)
-        });
+        })
     },
+
+    //  add new comment to list ***********************************************************
+    passNewCommentToCommentsList(comment) {
+      this.comments.push(comment)
+      location.reload()
+    },
+
     //  Delete message ***********************************************************
     deleteMessage() {
       const messageId = this.$route.params.id;
@@ -67,8 +74,8 @@ export default {
         })
         .then((res) => {
           if (res) {
-            this.$router.push("/feed"); //go to message feed
-            alert("You're message has been deleted")
+            alert('The message was deleted !')
+            this.$router.push('/feed')
           }
         })
         .catch((error) => {
@@ -76,16 +83,15 @@ export default {
           alert("You can't delete messages other than your own !")
         })
     },
-  },
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/main.scss";
+@import "src/assets/styles/_variables.scss";
 
 .messageCard {
     text-align: center;
-    max-width: 100%;
     width: 540px;
     background: $blue;
     border-radius: 16px;
@@ -94,13 +100,11 @@ export default {
     margin: 80px auto 20px;
 
     &__title {
-      font-weight: 800;
       color: #fff;
+      font-size: 25px;
     }
     &__subtitle {
       color: white;
-      font-weight: 500;
-      font-size: 30px;
     }
     &__action {
       color: #fff;
@@ -111,10 +115,10 @@ export default {
     &__content {
       color: $white;
       font-size: 20px;
-      border: 2px solid $lightRed;
+      border: 2px solid $white;
       border-radius: 30px;
-      padding: 5px;
-      margin: 15px;
+      width: 50%;
+      margin: 20px auto;
     }
     img {
       width: 50%;

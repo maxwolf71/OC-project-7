@@ -1,17 +1,12 @@
 <template>
   <div>
     <Nav />
-    <div class="card">
-      <h1 class="card__title">{{ user.firstName }} {{ user.lastName }}</h1>
-      <h3 class="card__subtitle">Bio :</h3>
-      
-      <!--<router-link <:to="{ name: 'Bio', params: { id: this.$store.state.user.userId }}"> MODIFY BIO, to implement if time left -->
-        <p class="bio">{{ user.bio }}</p>
-      <!--</router-link>-->
+    <div class="userCard">
+      <h1 class="userCard__name">{{ user.firstName }} {{ user.lastName }}</h1>
+      <h3 class="userCard__bio">About me :</h3>
+      <p class="bio">{{ user.bio }}</p> 
+      <button @click="logout" class="button">Sign out</button>
 
-      <div>
-        <button @click="logout" class="button">Sign out</button>
-      </div>
       <div v-if="user.id !== this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
         <button @click="logout" class="delAccount">Delete account (Not reversable !)</button>
       </div>
@@ -49,42 +44,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/main.scss";
+@import "src/assets/styles/_variables.scss";
 
-.card {
+.userCard {
   text-align: center;
-  max-width: 100%;
   width: 540px;
   background: $blue;
   border-radius: 16px;
   padding: 10px;
   border: 4px solid #fff;
-  margin: 200px auto;
+  margin: 150px auto;
 
-  &__title {
+  &__name {
+    color: $white;
+    font-size: 30px;
     font-weight: 800;
-    color: #fff;
+    text-decoration: 6px underline $mainRed;
   }
-  &__subtitle {
-    color: white;
+  &__bio {
+    color: $white;
     font-weight: 500;
     font-size: 30px;
-  }
-  &__action {
-    color: #fff;
-  }
-  &__action:hover {
-    cursor: pointer;
-  }
-  & .delAccount {
-    color: red;
   }
   .bio {
   font-weight: bold;
   padding: 20px 0;
-  border: 2px solid whitesmoke;
+  border: 4px solid $white;
   margin: 20px;
-  color: white;
+  color: $white;
   border-radius: 16px;
   }
 }
