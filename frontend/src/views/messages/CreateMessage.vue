@@ -16,14 +16,14 @@
         <div class="createMessageCard__messageContent">
           <label for="content">Message :</label><br />
           <textarea
-            name="content"
+            name="messageContent"
             class="messageContentInput"
             placeholder="Message content here"
             v-model="content"
           ></textarea>
           <br />
         </div>
-        <div class="createMessageCard__attachment">
+        <div class="attachmentcreateMessageCard">
           <label for="attachment">
             Select Image :
             <input type="file" name="attachment" /> <br />
@@ -62,7 +62,7 @@ export default {
       const token = this.$store.state.user.token
 
       if (this.title == "" || this.content == "") {
-        alert("Please fill in both fields !") 
+        alert("Please fill in both fields !");
       } else {
         axios
           .post("http://localhost:3000/api/messages/new", data, {
@@ -71,14 +71,14 @@ export default {
               Authorization: `Bearer ${token}`,
             },
           })
-          .then(res => {
+          .then((res) => {
             if (res) {
               this.$router.push("/feed"); //go to message feed
             }
           })
-          .catch(error => {
-            console.log(error)
-          })
+          .catch((error) => {
+            console.log(error.message);
+          });
       }
     },
   },
@@ -118,18 +118,18 @@ export default {
     .messageContentInput {
       width: 80%;
       margin: 10px auto;
+      font-size: 1.5rem;
     }
   }
-  &__attachment {
+  .attachmentcreateMessageCard {
     label {
       color: $white;
 
       input {
-        padding: 10px;
-        font-size: 1rem;
+        font-size: 15px;
         font-weight: bold;
         text-align: center;
-        background-color: $white;
+        background-color: $lightRed;
         color: $blue;
       }
     }
