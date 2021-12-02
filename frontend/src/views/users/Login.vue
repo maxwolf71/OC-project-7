@@ -1,41 +1,41 @@
 <template>
-  <div class="card">
+  <div class="loginCard">
 
-    <h1 class="card__title" v-if="mode == 'login'">Sign in</h1>
-    <h1 class="card__title" v-else>Sign up</h1>
+    <h1 class="loginCard__title" v-if="mode == 'login'">Sign in</h1>
+    <h1 class="loginCard__title" v-else>Sign up</h1>
 
-    <p class="card__subtitle" v-if="mode == 'login'">
+    <p class="loginCard__subtitle" v-if="mode == 'login'">
       Don't have an account yet ?
-      <span class="card__action" @click="switchToCreateAccount()">Create one</span>
+      <span class="loginCard__action" @click="switchToCreateAccount()">Create one</span>
     </p>
 
-    <p class="card__subtitle" v-else>
+    <p class="loginCard__subtitle" v-else>
       Already have an account ?<br>
-      <span class="card__action" @click="switchToLogin()">Sign in</span>
+      <span class="loginCard__action" @click="switchToLogin()">Sign in</span>
     </p>
 
     <div>
-      <input v-model="email" class="card__input" type="text" placeholder="Email Address"/>
+      <input v-model="email" class="loginCard__input" type="text" placeholder="Email Address"/>
     </div>
 
     <div v-if="mode == 'create'">
-      <input v-model="firstName" class="card__input" type="text" placeholder="First name"/><br>
-      <input v-model="lastName" class="card__input" type="text" placeholder="Last name"/>
+      <input v-model="firstName" class="loginCard__input" type="text" placeholder="First name"/><br>
+      <input v-model="lastName" class="loginCard__input" type="text" placeholder="Last name"/>
     </div>
 
     <div>
-      <input v-model="password" class="card__input" type="password" placeholder="Password"/>
+      <input v-model="password" class="loginCard__input" type="password" placeholder="Password"/>
     </div>
     
     <div v-if="mode == 'create'">
-      <input v-model="bio" class="card__input" type="Bio" placeholder="Enter a short bio (optional)"/>
+      <input v-model="bio" class="loginCard__input" type="Bio" placeholder="Enter a short bio (optional)"/>
     </div>
 
-    <div v-if="mode == 'login' && status == 'error_login'">
+    <div class="loginCard__title" v-if="mode == 'login' && status == 'error_login'">
       Wrong email and/or password !
     </div>
 
-    <div v-if="mode == 'create' && status == 'error_create'">
+    <div class="loginCard__title" v-if="mode == 'create' && status == 'error_create'">
       Email address already used !
     </div>
 
@@ -142,16 +142,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/main.scss";
+@import "src/assets/styles/_variables.scss";
 
-.card {
-  text-align: center;
-  width: 550px;
-  background: $blue;
-  border-radius: 16px;
-  padding: 10px;
-  border: 4px solid $lightRed;
-  margin: 50px auto;
+.loginCard {
+    text-align: center;
+    max-width: 100%;
+    width: 540px;
+    background: $blue;
+    border-radius: 16px;
+    padding: 10px;
+    border: 4px solid #fff;
+    margin: 150px auto;
 
   &__title {
     color: $white;
@@ -159,6 +160,7 @@ export default {
   &__subtitle {
     color: $white;
     font-size: 30px;
+    line-height: 2;
   }
   &__action {
     background-color: $lightRed;
@@ -170,7 +172,9 @@ export default {
     cursor: pointer;
   }
   &__input {
-    margin-top: 10px;
+    font-size: 1rem;
+    line-height: 2;
+    margin: 5px;
   }
 }
 </style>

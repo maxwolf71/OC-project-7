@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/styles/main.scss";
+@import "src/assets/styles/_variables.scss";
 
 .like {
   display: flex;
@@ -76,6 +76,7 @@ export default {
   font-size: 2rem;
   transform-style: 4s;
   width: 20%;
+  height: 50px;
   margin: 10px auto;
   
   & .notLiked {
