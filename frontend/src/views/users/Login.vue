@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "vuex"
 
 export default {
   name: "Login",
@@ -70,8 +70,8 @@ export default {
   mounted() {
     if (this.$store.state.user.userId != -1) {
       // if the id exists
-      this.$router.push("/");
-      return;
+      this.$router.push("/")
+      return
     }
   },
   computed: {
@@ -84,16 +84,16 @@ export default {
           this.lastName != "" &&
           this.password != ""
         ) {
-          return true;
+          return true
         } else {
-          return false;
+          return false
         }
       } else {
         // if login
         if (this.email != "" && this.password != "") {
-          return true;
+          return true
         } else {
-          return false;
+          return false
         }
       }
     },
@@ -101,27 +101,27 @@ export default {
   },
   methods: {
     switchToCreateAccount() {
-      this.mode = "create";
+      this.mode = "create"
     },
     switchToLogin() {
-      this.mode = "login";
+      this.mode = "login"
     },
     login() {
-      const self = this;
+      const self = this
       this.$store
         .dispatch("login", {
           email: this.email,
           password: this.password,
         })
         .then(function () {
-          self.$router.push("/profile");
+          self.$router.push("/profile")
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err)
         })
     },
     createAccount() {
-      const self = this;
+      const self = this
       this.$store
         .dispatch("createAccount", {
           email: this.email,
@@ -131,14 +131,14 @@ export default {
           bio: this.bio,
         })
         .then(function () {
-          self.login();
+          self.login()
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err)
         })
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

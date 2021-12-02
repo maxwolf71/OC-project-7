@@ -33,7 +33,7 @@ export default {
   }
   &__links, a {
     color: $white;
-    font-size: 40px;
+    font-size: 2.8rem;
   }
   a.router-link-active {
     color: $blue;

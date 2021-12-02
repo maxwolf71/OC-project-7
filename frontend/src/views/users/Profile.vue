@@ -57,14 +57,12 @@ export default {
 
   &__name {
     color: $white;
-    font-size: 30px;
-    font-weight: 800;
+    font-size: 2rem;
     text-decoration: 6px underline $mainRed;
   }
   &__bio {
     color: $white;
-    font-weight: 500;
-    font-size: 30px;
+    font-size: 1.2rem;
   }
   .bio {
   font-weight: bold;

@@ -23,7 +23,7 @@
           ></textarea>
           <br />
         </div>
-        <div class="createMessageCard__attachment">
+        <div class="attachmentcreateMessageCard">
           <label for="attachment">
             Select Image :
             <input type="file" name="attachment" /> <br />
@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import Nav from "@/components/Nav";
+import axios from "axios"
+import Nav from "@/components/Nav"
 
 export default {
   name: "Message",
@@ -46,23 +46,23 @@ export default {
     return {
       title: "",
       content: "",
-    };
+    }
   },
   mounted() {
     if (this.$store.state.user.userId == -1) {
       // if userId doesn't exist
-      this.$router.push("/"); //go back to login
-      return;
+      this.$router.push("/") //go back to login
+      return
     }
   },
   methods: {
     createMessage() {
-      const formCreate = document.getElementsByClassName("formCreate")[0];
-      let data = new FormData(formCreate);
+      const formCreate = document.getElementsByClassName("formCreate")[0]
+      let data = new FormData(formCreate)
       const token = this.$store.state.user.token
 
       if (this.title == "" || this.content == "") {
-        alert("Please fill in both fields !") 
+        alert("Please fill in both fields !")
       } else {
         axios
           .post("http://localhost:3000/api/messages/new", data, {
@@ -73,16 +73,16 @@ export default {
           })
           .then(res => {
             if (res) {
-              this.$router.push("/feed"); //go to message feed
+              this.$router.push("/feed") //go to message feed
             }
           })
-          .catch(error => {
-            console.log(error)
+          .catch((error) => {
+            console.log(error.message)
           })
       }
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -103,7 +103,7 @@ export default {
 
   &__title {
     color: $white;
-    font-size: 25px;
+    font-size: 1.5rem;
 
     .titleInput {
       margin-bottom: 20px;
@@ -113,23 +113,23 @@ export default {
   }
   &__messageContent {
     color: $white;
-    font-size: 20px;
+    font-size: 1.5rem;
 
     .messageContentInput {
       width: 80%;
       margin: 10px auto;
+      font-size: 1.2rem;
     }
   }
-  &__attachment {
+  .attachmentcreateMessageCard {
     label {
       color: $white;
 
       input {
-        padding: 10px;
         font-size: 1rem;
         font-weight: bold;
         text-align: center;
-        background-color: $white;
+        background-color: $lightRed;
         color: $blue;
       }
     }

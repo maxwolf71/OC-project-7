@@ -16,16 +16,16 @@
         </div>
       </div>
       <Comments />
-      <CreateComment @newComment="passNewCommentToCommentsList"/>   
+      <CreateComment />   
   </div>
 </template>
 
 <script>
-import Nav from "@/components/Nav";
-import Like from "@/components/Like";
-import CreateComment from "@/components/CreateComment";
-import Comments from "@/components/Comments";
-import axios from "axios";
+import Nav from "@/components/Nav"
+import Like from "@/components/Like"
+import CreateComment from "@/components/CreateComment"
+import Comments from "@/components/Comments"
+import axios from "axios"
 
 export default {
   name: "OneMessage",
@@ -46,7 +46,7 @@ export default {
 
       axios
         .get(`http://localhost:3000/api/messages/${messageId}`)
-        .then((response) => {
+        .then(response => {
           this.message = response.data
         })
         .catch((err) => {
@@ -54,16 +54,10 @@ export default {
         })
     },
 
-    //  add new comment to list ***********************************************************
-    passNewCommentToCommentsList(comment) {
-      this.comments.push(comment)
-      location.reload()
-    },
-
     //  Delete message ***********************************************************
     deleteMessage() {
-      const messageId = this.$route.params.id;
-      const token = this.$store.state.user.token;
+      const messageId = this.$route.params.id
+      const token = this.$store.state.user.token
 
       axios
         .delete(`http://localhost:3000/api/messages/${messageId}`, {
@@ -79,7 +73,7 @@ export default {
           }
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error)
           alert("You can't delete messages other than your own !")
         })
     },
@@ -101,7 +95,8 @@ export default {
 
     &__title {
       color: #fff;
-      font-size: 25px;
+      font-size: 2rem;
+      text-decoration: 6px underline $mainRed;
     }
     &__subtitle {
       color: white;
@@ -114,11 +109,11 @@ export default {
     }
     &__content {
       color: $white;
-      font-size: 20px;
-      border: 2px solid $white;
+      font-size: 1.4rem;
+      border: 2px solid $lightRed;
       border-radius: 30px;
-      width: 50%;
-      margin: 20px auto;
+      padding: 5px;
+      margin: 15px;
     }
     img {
       width: 50%;

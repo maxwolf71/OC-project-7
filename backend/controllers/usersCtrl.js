@@ -153,8 +153,8 @@ module.exports = {
 
   // DELETE USER PROFILE ***********************************************************************
   deleteProfile: async (req, res) => {
-    const headerAuth = req.headers['authorization'];
-    const userId = jwtUtils.getUserId(headerAuth);
+    const headerAuth = req.headers['authorization']
+    const userId = jwtUtils.getUserId(headerAuth)
 
     models.User.findOne({
         where: {

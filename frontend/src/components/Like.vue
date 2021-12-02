@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
 
 export default {
   name: "Like",
@@ -16,7 +16,7 @@ export default {
     }
   },
   mounted() {
-    const messageId = this.$route.params.id;
+    const messageId = this.$route.params.id
 
     axios
       .get(`http://localhost:3000/api/messages/${messageId}`)
@@ -29,8 +29,8 @@ export default {
   },
   methods: {
     createLike() {
-      const messageId = this.$route.params.id;
-      const token = this.$store.state.user.token;
+      const messageId = this.$route.params.id
+      const token = this.$store.state.user.token
 
       axios
         .post(
@@ -56,7 +56,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          alert("unable to like message !");
+          alert("unable to like message !")
         })
     },
   },

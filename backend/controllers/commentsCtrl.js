@@ -73,8 +73,8 @@ module.exports = {
             .catch(error => res.status(500).json({ error: 'Unable to find user !' }))
     },
     deleteComment: async (req, res) => {
-        const headerAuth = req.headers['authorization'];
-        const userId = jwtUtils.getUserId(headerAuth);
+        const headerAuth = req.headers['authorization']
+        const userId = jwtUtils.getUserId(headerAuth)
 
         models.Comment.findOne({
             where: {

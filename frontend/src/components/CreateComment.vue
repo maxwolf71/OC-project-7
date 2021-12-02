@@ -16,21 +16,20 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
 
 export default {
   name: "CreateComment",
   data() {
     return {
       content: '',
-      comments: []
     }
   },
   methods: {
     createComment() {
-      const messageId = this.$route.params.id;
-      const token = this.$store.state.user.token;
-      const content = this.content;
+      const messageId = this.$route.params.id
+      const token = this.$store.state.user.token
+      const content = this.content
 
       if (!content == "") {
         axios
@@ -45,8 +44,7 @@ export default {
             }
           )
           .then(response => {
-            this.comment = response.data
-            this.$emit('newComment', this.comment)
+            alert('The comment has been added !')
             location.reload()
           })
           .catch(err => {
@@ -57,7 +55,7 @@ export default {
       }
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

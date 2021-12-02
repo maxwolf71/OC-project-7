@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import Nav from "@/components/Nav";
+import axios from "axios"
+import Nav from "@/components/Nav"
 
 export default {
   name: "Feed",
@@ -28,40 +28,40 @@ export default {
   data() {
     return {
       messages: [],
-    };
+    }
   },
   mounted() {
     if (this.$store.state.user.userId == -1) {
       // if userId doesn't exist
-      this.$router.push("/"); //go back to login
-      return;
+      this.$router.push("/") //go back to login
+      return
     }
   },
   created() {
     axios
       .get("http://localhost:3000/api/messages")
       .then((messages) => {
-        this.messages = messages.data;
+        this.messages = messages.data
       })
       .catch((err) => {
-        console.log(err.message);
-      });
+        console.log(err.message)
+      })
   },
   methods: {
     dateOfMessage(date) {
-      const event = new Date(date);
+      const event = new Date(date)
       const options = {
         year: "numeric",
         month: "long",
         day: "numeric",
         hour: "numeric",
         minute: "numeric",
-      };
+      }
 
-      return event.toLocaleDateString("en-En", options);
+      return event.toLocaleDateString("en-En", options)
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -85,12 +85,12 @@ export default {
     }
     &__title {
       color: $white;
-      font-size: 30px;
+      font-size: 2rem;
       text-decoration: 6px underline $mainRed;
     }
     &__content {
       color: $white;
-      font-size: 20px;
+      font-size: 1.4rem;
       border: 2px solid $lightRed;
       border-radius: 30px;
       padding: 5px;
@@ -98,7 +98,7 @@ export default {
     }
     &__datePublish {
       color: $mainRed;
-      font-size: 15px;
+      font-size: 0.9rem;
       font-style: italic;
     }
     img {
