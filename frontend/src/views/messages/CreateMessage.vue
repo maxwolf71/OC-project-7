@@ -21,7 +21,7 @@
             placeholder="Message content here"
             v-model="content"
           ></textarea>
-          <br />
+          <br /> 
         </div>
         <div class="attachmentcreateMessageCard">
           <label for="attachment">
