@@ -12,7 +12,6 @@ const PASSWORD_REGEX = /^(?=.*\d).{4,8}$/
 module.exports = {
 
   // CREATE AN ACCOUNT  ***********************************************************************
-
   createAccount: function (req, res) {
 
     // Params

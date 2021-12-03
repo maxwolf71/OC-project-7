@@ -1,5 +1,5 @@
 {
-  "name": "first-server",
+  "name": "groupomania-server",
   "version": "1.0.0",
   "description": "Serveur HTTP for REST API",
   "main": "server.js",
