@@ -6,7 +6,7 @@
         Published by {{ comment.firstName }} {{ comment.lastName }} on
         {{ dateOfComment(comment.createdAt) }}
       </p>
-      <div class="button" v-if="comment.userId == userId" @click="deleteComment(comment.id)">
+      <div class="button" v-if="comment.userId == userId || this.$store.state.user.isAdmin == true" @click="deleteComment(comment.id)">
         Delete comment
       </div>
     </div>
@@ -42,11 +42,7 @@ export default {
           this.comments = comments.data
         })
         .catch(error => {
-          if(this.comments == '') {
-            this.comments = [{content: 'No comments for this message'}]
-          } else {
-            console.log('other error')
-          }
+          console.log(error)
         })
     },
     dateOfComment(date) {

@@ -66,7 +66,7 @@ export default {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((res) => {
+        .then(res => {
           if (res) {
             alert('The message was deleted !')
             this.$router.push('/feed')

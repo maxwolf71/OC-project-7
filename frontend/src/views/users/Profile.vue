@@ -6,10 +6,6 @@
       <h3 class="userCard__bio">About me :</h3>
       <p class="bio">{{ user.bio }}</p> 
       <button @click="logout" class="button">Sign out</button>
-
-      <div v-if="user.id !== this.$store.state.user.userId || this.$store.state.user.isAdmin == true">
-        <button @click="logout" class="delAccount">Delete account (Not reversable !)</button>
-      </div>
     </div>
   </div>
 </template>
