@@ -29,6 +29,9 @@ export default {
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
+    overflow: scroll;
+    overflow-x: hidden;
+
     @media (min-width: 1024px) {
       background-size: contain;
   }
