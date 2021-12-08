@@ -1,51 +1,40 @@
 <template>
   <div class="loginCard">
-
     <h1 class="loginCard__title" v-if="mode == 'login'">Sign in</h1>
     <h1 class="loginCard__title" v-else>Sign up</h1>
-
     <p class="loginCard__subtitle" v-if="mode == 'login'">
       Don't have an account yet ?
       <span class="loginCard__action" @click="switchToCreateAccount()">Create one</span>
     </p>
-
     <p class="loginCard__subtitle" v-else>
       Already have an account ?<br>
       <span class="loginCard__action" @click="switchToLogin()">Sign in</span>
     </p>
-
     <div>
       <input v-model="email" class="loginCard__input" type="text" placeholder="Email Address"/>
     </div>
-
     <div v-if="mode == 'create'">
       <input v-model="firstName" class="loginCard__input" type="text" placeholder="First name"/><br>
       <input v-model="lastName" class="loginCard__input" type="text" placeholder="Last name"/>
     </div>
-
     <div>
       <input v-model="password" class="loginCard__input" type="password" placeholder="Password"/>
     </div>
-    
     <div v-if="mode == 'create'">
       <input v-model="bio" class="loginCard__input" type="Bio" placeholder="Enter a short bio (optional)"/>
     </div>
-
     <div class="loginCard__title" v-if="mode == 'login' && status == 'error_login'">
       Wrong email and/or password !
     </div>
-
     <div class="loginCard__title" v-if="mode == 'create' && status == 'error_create'">
       Email address already used !
     </div>
-
     <div>
       <button @click="login()" class="button" :class="{ 'button--disabled': !validatedFields }" 
       v-if="mode == 'login'">
         <span v-if="status == 'loading'">Connecting...</span>
         <span v-else>Sign in</span>
       </button>
-
       <button @click="createAccount()" class="button" :class="{ 'button--disabled': !validatedFields }" 
       v-else>
         <span v-if="status == 'loading'">Creating account...</span>
