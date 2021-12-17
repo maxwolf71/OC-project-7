@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router"
 // Users imports
 import Login from '../views/users/Login.vue'
 import Profile from '../views/users/Profile.vue'
-//import Bio from '../views/users/Bio.vue'
+import Bio from '../views/users/Bio.vue'
 
 // Messages imports
 import Feed from '../views/messages/Feed.vue' // display all messages
@@ -53,14 +53,14 @@ const routes = [
             title: 'OneMessage'
         }
     },
-    /*{
+    {
         name: 'Bio',
         path: '/bio/:id',
         component: Bio,
         meta: {
             title: 'Bio'
         }
-    },*/
+    },
     {
         name: 'NotFound',
         path: '/:pathMatch(.*)',

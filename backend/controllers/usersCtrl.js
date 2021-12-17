@@ -173,7 +173,7 @@ module.exports = {
   },
 
   // UPDATE USER PROFILE ***********************************************************************
-/*  updateUserBio: function (req, res) {
+    updateUserBio: function (req, res) {
     const headerAuth = req.headers['authorization']
     const userId = jwtUtils.getUserId(headerAuth)
 
@@ -215,6 +215,6 @@ module.exports = {
         return res.status(500).json({ 'error': 'cannot update user profile' })
       }
     })
-  }*/
+  }
 }
 

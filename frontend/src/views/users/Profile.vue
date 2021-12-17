@@ -2,9 +2,11 @@
   <div>
     <Nav />
     <div class="userCard">
-      <h1 class="userCard__name">{{ user.firstName }} {{ user.lastName }}</h1>
-      <h3 class="userCard__bio">About me :</h3>
-      <p class="bio">{{ user.bio }}</p> 
+      <h1 class="userCard__name">{{ user.firstName }} {{ user.lastName }}</h1> 
+      <h3 class="userCard__bio">Bio :</h3>
+      <router-link :to="{ name: 'Bio', params: { id: this.$store.state.user.userId } }">
+        <p class="bio">{{ user.bio }}</p>
+      </router-link>
       <button @click="logout" class="button">Sign out</button>
     </div>
   </div>
