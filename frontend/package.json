@@ -12,7 +12,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "axios": "^0.24.0",
-    "core-js": "^3.19.3",
+    "node-sass": "^6.0.1",
     "vue": "^3.2.24",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"
@@ -23,7 +23,6 @@
     "@vue/compiler-sfc": "^3.2.24",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.4.1",
-    "node-sass": "^4.14.1",
     "sass-loader": "^10"
   },
   "eslintConfig": {

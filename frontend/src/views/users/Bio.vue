@@ -1,24 +1,29 @@
 <template>
-  <div class="editBioCard">
-    <form class="formCreate" @submit.prevent="editBio">
-      <label for="bio"></label>
-      <textarea
-        name="bio"
-        class="editBioCard__content"
-        placeholder="New bio here"
-        v-model="bio"
-      ></textarea>
-      <br />
-      <button class="button" type="submit">Submit</button>
-    </form>
+  <div>
+    <Nav />
+    <div class="editBioCard">
+      <form class="formCreate" @submit.prevent="editBio">
+        <label for="bio"></label>
+        <textarea
+          name="bio"
+          class="editBioCard__content"
+          placeholder="New bio here"
+          v-model="bio"
+        ></textarea>
+        <br />
+        <button class="button" type="submit">Submit</button>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Nav from "@/components/Nav";
 
 export default {
   name: "Bio",
+  components: { Nav },
   data() {
     return {
       bio: "",
@@ -26,11 +31,11 @@ export default {
   },
   methods: {
     editBio() {
-      const formCreate = document.getElementsByClassName("formCreate")[0];
+      const formCreate = document.getElementsByClassName("formCreate")[0]
       let data = new FormData(formCreate);
 
-      const userId = this.$store.state.user.userId;
-      const token = this.$store.state.user.token;
+      const userId = this.$store.state.user.userId
+      const token = this.$store.state.user.token
 
       axios
         .put(`http://localhost:3000/api/users/bio/${userId}`, data, {
@@ -43,7 +48,7 @@ export default {
         .then((res) => (this.bio = res.data))
         .catch((error) => {
           console.log(error);
-        });
+        })
     },
   },
 };
